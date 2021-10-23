@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Homeless Lives Matter</string>
     <string name="tv_login">LOGIN</string>
+    <string name="tv_register2">Registrarse</string>
+    <string name="tv_nombre">Nombre</string>
+    <string name="tv_apellido">Apellido</string>
+    <string name="tv_email">E-Mail</string>
+    <string name="tv_pass">Contraseña</string>
+    <string name="tv_repetirpass">Repetir Contraseña</string>
 </resources>
