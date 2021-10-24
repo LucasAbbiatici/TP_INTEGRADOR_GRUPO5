@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:onClick="redirec_register"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -34,7 +35,8 @@
             android:layout_marginTop="20dp"
             android:ems="10"
             android:hint="@string/tv_email"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:minHeight="48dp" />
 
         <EditText
             android:id="@+id/et_password"
@@ -43,7 +45,8 @@
             android:layout_marginTop="10dp"
             android:ems="10"
             android:hint="@string/tv_pass"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:minHeight="48dp" />
 
         <Button
             android:id="@+id/btn_ingresar"
@@ -51,7 +54,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
-            android:text="@string/btn_ingresar" />
+            android:onClick="ingresar"
+            android:text="@string/btn_ingresar"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/button_shape"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -72,9 +78,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:clickable="true"
+                android:onClick="redirec_register"
                 android:text="@string/tv_register2"
                 android:textColor="@color/purple_500"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

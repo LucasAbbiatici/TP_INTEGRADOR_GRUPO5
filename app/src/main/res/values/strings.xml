@@ -10,5 +10,6 @@
 
     <string name="btn_ingresar">Ingresar</string>
     <string name="tv_notienescuenta">¿Aún no tienes cuenta?</string>
+    <string name="title_activity_maps">MapsActivity</string>
 
 </resources>
