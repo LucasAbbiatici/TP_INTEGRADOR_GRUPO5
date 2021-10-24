@@ -7,4 +7,8 @@
     <string name="tv_email">E-Mail</string>
     <string name="tv_pass">Contraseña</string>
     <string name="tv_repetirpass">Repetir Contraseña</string>
+
+    <string name="btn_ingresar">Ingresar</string>
+    <string name="tv_notienescuenta">¿Aún no tienes cuenta?</string>
+
 </resources>
