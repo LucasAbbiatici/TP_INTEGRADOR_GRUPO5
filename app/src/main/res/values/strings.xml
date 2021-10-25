@@ -12,4 +12,9 @@
     <string name="tv_notienescuenta">¿Aún no tienes cuenta?</string>
     <string name="title_activity_maps">MapsActivity</string>
 
+    <string name="tv_titulo">Modicar Contraseña</string>
+    <string name="tv_contraActual">Contraseña Actual</string>
+    <string name="tv_nuevaContra">Nueva Contraseña</string>
+    <string name="tv_repetirContra">Repetir Contraseña</string>
+    <string name="btn_Modificar">Modificar</string>
 </resources>
