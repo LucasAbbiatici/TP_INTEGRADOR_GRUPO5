@@ -13,8 +13,10 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.248">
 
         <TextView
             android:id="@+id/tv_title"
@@ -37,8 +39,12 @@
                 android:id="@+id/tv_cant"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:text="@string/tv_addloca_cant" />
+                android:text="@string/tv_addloca_cant"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/et_cant"
@@ -46,56 +52,64 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="number" />
+                android:inputType="number"
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
         </LinearLayout>
 
         <Switch
             android:id="@+id/sw_children"
-            android:layout_width="160dp"
+            android:layout_width="190dp"
             android:layout_height="wrap_content"
-            android:text="@string/sw_addloca_children"
             android:layout_marginBottom="10dp"
-            />
+            android:minHeight="48dp"
+            android:text="@string/sw_addloca_children"
+            android:textSize="18sp" />
 
         <Switch
             android:id="@+id/sw_pets"
-            android:layout_width="160dp"
+            android:layout_width="190dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:minHeight="48dp"
             android:text="@string/sw_addloca_pets"
-            android:layout_marginBottom="10dp" />
+            android:textSize="18sp" />
 
         <Switch
             android:id="@+id/sw_handicapped"
-            android:layout_width="160dp"
+            android:layout_width="190dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:minHeight="48dp"
             android:text="@string/sw_addloca_handicapped"
-            android:layout_marginBottom="10dp" />
+            android:textSize="18sp" />
 
         <Switch
             android:id="@+id/sw_grandparents"
-            android:layout_width="160dp"
+            android:layout_width="190dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:text="@string/sw_addloca_grandparents" />
+            android:layout_marginBottom="20dp"
+            android:minHeight="48dp"
+            android:text="@string/sw_addloca_grandparents"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tv_comments"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:text="@string/tv_addloca_comments" />
+            android:layout_marginBottom="5dp"
+            android:text="@string/tv_addloca_comments"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/editTextTextMultiLine"
+            android:id="@+id/et_comentarios"
+            android:layout_width="220dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:ems="10"
-            android:gravity="top|start"
-            android:lines="8"
-            android:maxLines="10"
-            android:minLines="3"
-            android:scrollbars="vertical"
-            android:layout_width="250dp"
-            />
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <Button
             android:id="@+id/btn_add"

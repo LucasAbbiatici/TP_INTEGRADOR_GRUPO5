@@ -19,6 +19,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
+    private com.getbase.floatingactionbutton.FloatingActionButton fabActual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        com.getbase.floatingactionbutton.FloatingActionButton fabActual;
         fabActual = findViewById(R.id.fab_addActual);
         fabActual.setOnClickListener(new View.OnClickListener() {
             @Override
