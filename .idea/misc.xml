@@ -4,20 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android/AndroidStudioProjects/TP_INTEGRADOR_GRUPO5/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/Documents/GitHub/TP_INTEGRADOR_GRUPO5/app/src/main/res/drawable/bg_label.xml" value="0.3828125" />
-        <entry key="..\:/Documents/GitHub/TP_INTEGRADOR_GRUPO5/app/src/main/res/drawable/button_shape.xml" value="0.3828125" />
-        <entry key="..\:/Documents/GitHub/TP_INTEGRADOR_GRUPO5/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.3828125" />
         <entry key="..\:/Documents/GitHub/TP_INTEGRADOR_GRUPO5/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/Documents/GitHub/TP_INTEGRADOR_GRUPO5/app/src/main/res/layout/activity_maps.xml" value="0.36666666666666664" />
-        <entry key="..\:/Documents/GitHub/TP_INTEGRADOR_GRUPO5/app/src/main/res/layout/activity_register.xml" value="0.36666666666666664" />
-        <entry key="..\:/Documents/GitHub/TP_INTEGRADOR_GRUPO5/app/src/main/res/layout/button_shape.xml" value="0.36666666666666664" />
-        <entry key="..\:/Repositorio github/TP_INTEGRADOR_GRUPO5/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Agustin/Documents/ESTUDIOS/TUSI/Proyecto Prog5/TP_INTEGRADOR_GRUPO5/app/src/main/res/layout/activity_cambiar_contrasenia.xml" value="0.3432971014492754" />
-        <entry key="..\:/Users/Agustin/Documents/ESTUDIOS/TUSI/Proyecto Prog5/TP_INTEGRADOR_GRUPO5/app/src/main/res/layout/activity_register.xml" value="0.338768115942029" />
+        <entry key="..\:/Users/Fede/Documents/GitHub/TP_INTEGRADOR_GRUPO5/app/src/main/res/layout/activity_agregar_ubicacion.xml" value="0.33" />
+        <entry key="..\:/Users/Fede/Documents/GitHub/TP_INTEGRADOR_GRUPO5/app/src/main/res/layout/activity_cambiar_contrasenia.xml" value="0.20364583333333333" />
+        <entry key="..\:/Users/Fede/Documents/GitHub/TP_INTEGRADOR_GRUPO5/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/Fede/Documents/GitHub/TP_INTEGRADOR_GRUPO5/app/src/main/res/layout/activity_maps.xml" value="0.234375" />
+        <entry key="..\:/Users/Fede/Documents/GitHub/TP_INTEGRADOR_GRUPO5/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.37037037037037035" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

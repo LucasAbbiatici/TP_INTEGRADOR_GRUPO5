@@ -17,4 +17,14 @@
     <string name="tv_nuevaContra">Nueva Contraseña</string>
     <string name="tv_repetirContra">Repetir Contraseña</string>
     <string name="btn_Modificar">Modificar</string>
+
+    //texts add_location
+    <string name="tv_addloca_title">Completar datos de la ubicación</string>
+    <string name="tv_addloca_cant">Cantinadad de personas: </string>
+    <string name="sw_addloca_children">Niños: </string>
+    <string name="sw_addloca_pets">Mascotas: </string>
+    <string name="sw_addloca_handicapped">Discapacitados: </string>
+    <string name="sw_addloca_grandparents">Ancianos: </string>
+    <string name="tv_addloca_comments">Comentarios generales</string>
+    <string name="btn_addloca_add">Agregar</string>
 </resources>

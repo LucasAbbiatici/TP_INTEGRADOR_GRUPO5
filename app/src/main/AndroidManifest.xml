@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TP_INTEGRADOR_GRUPO5">
         <activity
+            android:name=".AgregarUbicacionActivity"
+            android:exported="true" />
+        <activity
             android:name=".CambiarContraseniaActivity"
             android:exported="true" />
         <!--

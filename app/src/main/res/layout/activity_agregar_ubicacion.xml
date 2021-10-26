@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AgregarUbicacionActivity">
+
+    <LinearLayout
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:text="@string/tv_addloca_title"
+            android:textColor="@color/purple_500"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_cant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/tv_addloca_cant" />
+
+            <EditText
+                android:id="@+id/et_cant"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="number" />
+        </LinearLayout>
+
+        <Switch
+            android:id="@+id/sw_children"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:text="@string/sw_addloca_children"
+            android:layout_marginBottom="10dp"
+            />
+
+        <Switch
+            android:id="@+id/sw_pets"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:text="@string/sw_addloca_pets"
+            android:layout_marginBottom="10dp" />
+
+        <Switch
+            android:id="@+id/sw_handicapped"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:text="@string/sw_addloca_handicapped"
+            android:layout_marginBottom="10dp" />
+
+        <Switch
+            android:id="@+id/sw_grandparents"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:text="@string/sw_addloca_grandparents" />
+
+        <TextView
+            android:id="@+id/tv_comments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:text="@string/tv_addloca_comments" />
+
+        <EditText
+            android:id="@+id/editTextTextMultiLine"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:gravity="top|start"
+            android:lines="8"
+            android:maxLines="10"
+            android:minLines="3"
+            android:scrollbars="vertical"
+            android:layout_width="250dp"
+            />
+
+        <Button
+            android:id="@+id/btn_add"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/button_shape"
+            android:text="@string/btn_addloca_add" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
