@@ -17,6 +17,8 @@
     <string name="tv_nuevaContra">Nueva Contraseña</string>
     <string name="tv_repetirContra">Repetir Contraseña</string>
     <string name="btn_Modificar">Modificar</string>
+    <string name="tv_direccion">[Direccion]</string>
+    <string name="btn_continuar">Continuar</string>
 
     //texts add_location
     <string name="tv_addloca_title">Completar datos de la ubicación</string>

@@ -23,6 +23,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ActivityMapsBinding binding;
     private com.getbase.floatingactionbutton.FloatingActionButton fabActual;
     private com.getbase.floatingactionbutton.FloatingActionButton fabUser;
+    private com.getbase.floatingactionbutton.FloatingActionButton fabManual;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +67,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+        fabManual = findViewById(R.id.fab_addManual);
+        fabManual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                LayoutInflater inflater = LayoutInflater.from(MapsActivity.this);
+                View popupWindow = inflater.inflate(R.layout.dialog_ubicacion,null);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MapsActivity.this);
+
+                builder.setView(popupWindow);
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
+            }
+        });
+
     }
 
     public void logout(View view){
@@ -74,6 +95,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void redirec_modificarPass(View view){
         Intent i = new Intent(this, CambiarContraseniaActivity.class);
+        startActivity(i);
+    }
+
+    public void redirec_datosUbicacion(View view){
+        Intent i = new Intent(this, AgregarUbicacionActivity.class);
         startActivity(i);
     }
 
