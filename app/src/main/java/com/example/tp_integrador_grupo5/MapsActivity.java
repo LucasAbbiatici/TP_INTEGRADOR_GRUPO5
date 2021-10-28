@@ -2,12 +2,16 @@ package com.example.tp_integrador_grupo5;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -25,6 +29,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private com.getbase.floatingactionbutton.FloatingActionButton fabActual;
     private com.getbase.floatingactionbutton.FloatingActionButton fabUser;
     private com.getbase.floatingactionbutton.FloatingActionButton fabManual;
+    private ImageView icon_mascotas;
 
 
     @Override
@@ -74,7 +79,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onClick(View v) {
 
-
                 LayoutInflater inflater = LayoutInflater.from(MapsActivity.this);
                 View popupWindow = inflater.inflate(R.layout.dialog_datosubicacion,null);
 
@@ -85,9 +89,18 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 AlertDialog dialog = builder.create();
                 dialog.show();
 
+                //icon_mascotas = (ImageView) dialog.findViewById(R.id.ic_mascotas);
+                //icon_mascotas.setColorFilter(Color.GREEN);
+
             }
         });
 
+    }
+
+    public void accionCompartir(View view) {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        startActivity(sendIntent);
     }
 
     public void logout(View view){
