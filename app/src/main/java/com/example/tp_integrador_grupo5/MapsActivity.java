@@ -68,6 +68,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
+        //onclick fab agregar manual
         fabManual = findViewById(R.id.fab_addManual);
         fabManual.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +76,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
                 LayoutInflater inflater = LayoutInflater.from(MapsActivity.this);
-                View popupWindow = inflater.inflate(R.layout.dialog_ubicacion,null);
+                View popupWindow = inflater.inflate(R.layout.dialog_datosubicacion,null);
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(MapsActivity.this);
 

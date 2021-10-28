@@ -39,4 +39,6 @@
     <string name="btn_modificarContra">Modificar contraseña</string>
     <string name="tv_logout">LogOut</string>
 
+    <string name="tv_datosdeubicacion">Datos de ubicación</string>
+    <string name="tv_cantidaddepersonas">Cantidad de personas: </string>
 </resources>
