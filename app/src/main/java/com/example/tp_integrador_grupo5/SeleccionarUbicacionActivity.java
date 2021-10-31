@@ -4,10 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.tp_integrador_grupo5.databinding.ActivityMapsBinding;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -20,10 +23,17 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.w3c.dom.Text;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
 public class SeleccionarUbicacionActivity extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
-
+    private TextView direccion;
+    private Geocoder geocoder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +45,8 @@ public class SeleccionarUbicacionActivity extends AppCompatActivity implements O
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
 
     }
 
@@ -50,8 +62,8 @@ public class SeleccionarUbicacionActivity extends AppCompatActivity implements O
                 double latitud = arg0.latitude;
                 double longitud = arg0.longitude;
 
-                //android.util.Log.i("onMapClick", String.valueOf(arg0.latitude));
-                //android.util.Log.i("onMapClick", String.valueOf(arg0.longitude));
+                android.util.Log.i("onMapClick", String.valueOf(arg0.latitude));
+                android.util.Log.i("onMapClick", String.valueOf(arg0.longitude));
 
                 LayoutInflater inflater = LayoutInflater.from(SeleccionarUbicacionActivity.this);
                 View popupWindow = inflater.inflate(R.layout.dialog_ubicacion,null);
@@ -62,9 +74,32 @@ public class SeleccionarUbicacionActivity extends AppCompatActivity implements O
 
                 AlertDialog dialog = builder.create();
                 dialog.show();
+
+                direccion = (TextView) dialog.findViewById(R.id.tv_direccion);
+
+                try {
+                    direccion.setText(traerDireccion(latitud,longitud));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
 
+    }
+
+    private String traerDireccion(double lat, double lng) throws IOException {
+        geocoder = new Geocoder(this, Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(lat, lng, 1);
+            Address obj = addresses.get(0);
+            String direc = obj.getAddressLine(0);
+
+            return direc;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return  "no";
     }
 
 }
