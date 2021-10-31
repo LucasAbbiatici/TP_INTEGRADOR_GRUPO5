@@ -78,7 +78,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         fabManual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+/*
                 LayoutInflater inflater = LayoutInflater.from(MapsActivity.this);
                 View popupWindow = inflater.inflate(R.layout.dialog_datosubicacion,null);
 
@@ -91,6 +91,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 //icon_mascotas = (ImageView) dialog.findViewById(R.id.ic_mascotas);
                 //icon_mascotas.setColorFilter(Color.GREEN);
+*/
+                Intent i = new Intent(getApplicationContext(), SeleccionarUbicacionActivity.class);
+                startActivity(i);
 
             }
         });
