@@ -39,12 +39,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        // onclick fab agregar ubicacion actual
+        // onClick fab agregar ubicacion actual
         fabActual = findViewById(R.id.fab_addActual);
         fabActual.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +53,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-        //onclick fab usuario
+        //onClick fab usuario
         fabUser = findViewById(R.id.fab_user);
         fabUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,25 +72,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-        //onclick fab agregar manual
+        //onClick fab agregar manual
         fabManual = findViewById(R.id.fab_addManual);
         fabManual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-/*
-                LayoutInflater inflater = LayoutInflater.from(MapsActivity.this);
-                View popupWindow = inflater.inflate(R.layout.dialog_datosubicacion,null);
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(MapsActivity.this);
-
-                builder.setView(popupWindow);
-
-                AlertDialog dialog = builder.create();
-                dialog.show();
 
                 //icon_mascotas = (ImageView) dialog.findViewById(R.id.ic_mascotas);
                 //icon_mascotas.setColorFilter(Color.GREEN);
-*/
+
                 Intent i = new Intent(getApplicationContext(), SeleccionarUbicacionActivity.class);
                 startActivity(i);
 

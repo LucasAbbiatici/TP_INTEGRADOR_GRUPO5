@@ -41,4 +41,6 @@
 
     <string name="tv_datosdeubicacion">Datos de ubicación</string>
     <string name="tv_cantidaddepersonas">Cantidad de personas: </string>
+
+    <string name="tv_ubicacionSeleccionada">Ubicación Seleccionada</string>
 </resources>

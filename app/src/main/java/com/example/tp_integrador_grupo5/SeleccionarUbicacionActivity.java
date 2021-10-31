@@ -4,12 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.tp_integrador_grupo5.databinding.ActivityMapsBinding;
@@ -34,6 +36,9 @@ public class SeleccionarUbicacionActivity extends AppCompatActivity implements O
     private ActivityMapsBinding binding;
     private TextView direccion;
     private Geocoder geocoder;
+    private Button boton_continuar;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +50,6 @@ public class SeleccionarUbicacionActivity extends AppCompatActivity implements O
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
 
 
     }
@@ -61,9 +65,6 @@ public class SeleccionarUbicacionActivity extends AppCompatActivity implements O
             {
                 double latitud = arg0.latitude;
                 double longitud = arg0.longitude;
-
-                android.util.Log.i("onMapClick", String.valueOf(arg0.latitude));
-                android.util.Log.i("onMapClick", String.valueOf(arg0.longitude));
 
                 LayoutInflater inflater = LayoutInflater.from(SeleccionarUbicacionActivity.this);
                 View popupWindow = inflater.inflate(R.layout.dialog_ubicacion,null);
@@ -83,6 +84,17 @@ public class SeleccionarUbicacionActivity extends AppCompatActivity implements O
                     e.printStackTrace();
                 }
 
+                boton_continuar = (Button) dialog.findViewById(R.id.btn_continuar);
+                boton_continuar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent i = new Intent(getApplicationContext(), AgregarUbicacionActivity.class);
+                        i.putExtra("latitud",latitud);
+                        i.putExtra("longitud",longitud);
+                        startActivity(i);
+                    }
+                });
+
             }
         });
 
@@ -98,8 +110,11 @@ public class SeleccionarUbicacionActivity extends AppCompatActivity implements O
             return direc;
         } catch (IOException e) {
             e.printStackTrace();
+            return "Error, dirección no encontrada.";
+
+
         }
-        return  "no";
+
     }
 
 }
