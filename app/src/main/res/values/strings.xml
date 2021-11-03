@@ -43,4 +43,6 @@
     <string name="tv_cantidaddepersonas">Cantidad de personas: </string>
 
     <string name="tv_ubicacionSeleccionada">Ubicación Seleccionada</string>
+
+    <string name="dialog_compartirUbicacion">Para poder utilizar nuestra aplicación, es necesario que comparta la ubicación de su dispositivo. De lo contrario no podrá acceder a su cuenta.</string>
 </resources>
