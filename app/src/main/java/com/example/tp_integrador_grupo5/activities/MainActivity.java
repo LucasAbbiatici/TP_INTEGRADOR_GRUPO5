@@ -1,4 +1,4 @@
-package com.example.tp_integrador_grupo5;
+package com.example.tp_integrador_grupo5.activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,8 +9,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
+
+import com.example.tp_integrador_grupo5.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +22,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        dialogBuilder();
+
+    }
+
+    private void dialogBuilder(){
 
         builder = new AlertDialog.Builder(MainActivity.this);
         builder.setMessage(R.string.dialog_compartirUbicacion).setPositiveButton("ACEPTAR", new DialogInterface.OnClickListener() {
