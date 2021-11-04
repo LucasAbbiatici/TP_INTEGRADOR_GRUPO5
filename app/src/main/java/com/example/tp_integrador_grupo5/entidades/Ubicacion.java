@@ -15,7 +15,10 @@ public class Ubicacion {
     private int cant_reportes;
     private boolean estado;
 
-    public Ubicacion(){}
+    public Ubicacion(){
+        this.cant_reportes = 0;
+        this.estado = true;
+    }
 
     public Ubicacion(int id, Usuario usuario, double latitud, double longitud, int cant_personas, boolean mascotas, boolean ancianos,
                      boolean ninios, boolean discapacitados, String comentarios, int cant_reportes, boolean estado) {

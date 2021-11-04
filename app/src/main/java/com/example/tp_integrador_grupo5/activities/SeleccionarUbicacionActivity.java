@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.tp_integrador_grupo5.R;
 import com.example.tp_integrador_grupo5.databinding.ActivityMapsBinding;
+import com.example.tp_integrador_grupo5.entidades.Usuario;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 
@@ -32,6 +34,7 @@ public class SeleccionarUbicacionActivity extends AppCompatActivity implements O
     private TextView direccion;
     private Geocoder geocoder;
     private Button boton_continuar;
+    private Usuario usuario;
 
 
     @Override
@@ -46,7 +49,7 @@ public class SeleccionarUbicacionActivity extends AppCompatActivity implements O
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-
+        usuario = (Usuario) getIntent().getSerializableExtra("usuario");
     }
 
     @Override
@@ -86,7 +89,9 @@ public class SeleccionarUbicacionActivity extends AppCompatActivity implements O
                         Intent i = new Intent(getApplicationContext(), AgregarUbicacionActivity.class);
                         i.putExtra("latitud",latitud);
                         i.putExtra("longitud",longitud);
+                        i.putExtra("usuario",usuario);
                         startActivity(i);
+
                     }
                 });
 

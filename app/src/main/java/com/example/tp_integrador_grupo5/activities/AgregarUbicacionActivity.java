@@ -3,10 +3,15 @@ package com.example.tp_integrador_grupo5.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
 
 import com.example.tp_integrador_grupo5.R;
+import com.example.tp_integrador_grupo5.conexion.DataUbicacion;
+import com.example.tp_integrador_grupo5.entidades.Ubicacion;
+import com.example.tp_integrador_grupo5.entidades.Usuario;
+import com.google.android.gms.maps.model.LatLng;
 
 public class AgregarUbicacionActivity extends AppCompatActivity {
     private EditText et_cant;
@@ -15,7 +20,11 @@ public class AgregarUbicacionActivity extends AppCompatActivity {
     private Switch sw_discapacitados;
     private Switch sw_ancianos;
     private EditText et_comentarios;
-
+    private Ubicacion ubicacion;
+    private Usuario usuario;
+    private double lat;
+    private double lng;
+    private DataUbicacion dataUbicacion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +37,30 @@ public class AgregarUbicacionActivity extends AppCompatActivity {
         sw_discapacitados = (Switch) findViewById(R.id.sw_handicapped);
         sw_ancianos = (Switch) findViewById(R.id.sw_grandparents);
         et_comentarios = (EditText) findViewById(R.id.et_comentarios);
+
+        lat = (double) getIntent().getExtras().getDouble("latitud");
+        lng = (double) getIntent().getExtras().getDouble("longitud");
+
+        usuario = (Usuario) getIntent().getSerializableExtra("usuario");
+
+    }
+
+    public void onClickAgregarUbicacion(View view){
+
+        ubicacion = new Ubicacion();
+
+        ubicacion.setUsuario(usuario);
+        ubicacion.setLatitud(lat);
+        ubicacion.setLongitud(lng);
+        ubicacion.setCant_personas(Integer.parseInt(et_cant.getText().toString()));
+        ubicacion.setMascotas(sw_mascotas.isChecked());
+        ubicacion.setAncianos(sw_ancianos.isChecked());
+        ubicacion.setNinios(sw_ninos.isChecked());
+        ubicacion.setDiscapacitados(sw_discapacitados.isChecked());
+        ubicacion.setComentarios(et_comentarios.getText().toString());
+
+        dataUbicacion = new DataUbicacion(ubicacion, this);
+        dataUbicacion.execute("agregar");
 
     }
 

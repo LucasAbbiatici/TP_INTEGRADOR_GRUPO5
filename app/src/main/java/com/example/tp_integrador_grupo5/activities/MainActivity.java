@@ -13,10 +13,8 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.example.tp_integrador_grupo5.R;
-import com.example.tp_integrador_grupo5.conexion.Asynctask.DataUser;
+import com.example.tp_integrador_grupo5.conexion.DataUser;
 import com.example.tp_integrador_grupo5.entidades.Usuario;
-
-import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity {
 

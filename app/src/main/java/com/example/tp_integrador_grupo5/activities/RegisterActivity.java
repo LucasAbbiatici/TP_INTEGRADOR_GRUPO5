@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.tp_integrador_grupo5.R;
-import com.example.tp_integrador_grupo5.conexion.Asynctask.DataUser;
+import com.example.tp_integrador_grupo5.conexion.DataUser;
 import com.example.tp_integrador_grupo5.entidades.Usuario;
 
 public class RegisterActivity extends AppCompatActivity {

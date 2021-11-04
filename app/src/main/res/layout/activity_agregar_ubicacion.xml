@@ -118,6 +118,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             android:background="@drawable/button_shape"
+            android:onClick="onClickAgregarUbicacion"
             android:text="@string/btn_addloca_add" />
 
     </LinearLayout>
