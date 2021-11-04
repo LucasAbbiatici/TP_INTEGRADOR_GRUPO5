@@ -2,6 +2,7 @@ package com.example.tp_integrador_grupo5.conexion.Asynctask;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.provider.ContactsContract;
 
 import com.example.tp_integrador_grupo5.conexion.DataDB;
 import com.example.tp_integrador_grupo5.entidades.Usuario;
@@ -28,7 +29,7 @@ public class DataUserActivity extends AsyncTask<String, Void, String> {
         String response = "";
         try {
             result2 = " ";
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName(DataDB.driver);
             Connection con = DriverManager.getConnection(DataDB.urlMySQL, DataDB.user, DataDB.pass);
             PreparedStatement statement = con.prepareStatement("INSERT INTO Usuarios (Nombre, Apellido, Email, " +
                     "Password) VALUES (? ,? ,? ,? )");
@@ -37,8 +38,8 @@ public class DataUserActivity extends AsyncTask<String, Void, String> {
             statement.setString(3, usuario.getEmail());
             statement.setString(4, usuario.getPassword());
 
-            statement.execute();
-
+            statement.executeUpdate();
+            con.close();
             response = "Conexion exitosa";
         }
         catch (Exception e){
@@ -47,5 +48,10 @@ public class DataUserActivity extends AsyncTask<String, Void, String> {
         }
 
         return response;
+    }
+
+    @Override
+    protected void onPostExecute(String response) {
+        System.out.println(response);
     }
 }
