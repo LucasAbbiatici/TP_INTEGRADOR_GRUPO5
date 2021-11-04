@@ -81,27 +81,30 @@ public class DataUser extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String response) {
+        Intent i;
 
-        if(response.equals("Usuario registrado exitosamente")){
-            Toast.makeText(context, response, Toast.LENGTH_LONG).show();
+        switch(response){
+            case "Usuario registrado exitosamente":
+                Toast.makeText(context, response, Toast.LENGTH_LONG).show();
 
-            Intent i = new Intent(context, MainActivity.class);
-            context.startActivity(i);
+                i = new Intent(context, MainActivity.class);
+                context.startActivity(i);
+                break;
+
+            case "Verificacion de login exitoso" :
+                i = new Intent(context, MapsActivity.class);
+                i.putExtra("usuario", usuario);
+                context.startActivity(i);
+                break;
+
+            case "Email o contraseña incorrectos" :
+                Toast.makeText(context, response, Toast.LENGTH_LONG).show();
+                break;
+
+            case "Error en la conexion a la base de datos" :
+                Toast.makeText(context, response, Toast.LENGTH_LONG).show();
+                break;
         }
-
-        if(response.equals("Verificacion de login exitoso")){
-            Intent i = new Intent(context, MapsActivity.class);
-            i.putExtra("usuario", usuario);
-            context.startActivity(i);
-        }
-
-        if(response.equals("Email o contraseña incorrectos")){
-            Toast.makeText(context, response, Toast.LENGTH_LONG).show();
-        }
-
-        if(response.equals("Error en la conexion a la base de datos")){
-            Toast.makeText(context, response, Toast.LENGTH_LONG).show();
-        }
-
+        
     }
 }

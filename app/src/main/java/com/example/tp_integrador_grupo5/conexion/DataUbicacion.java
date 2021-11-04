@@ -42,14 +42,6 @@ public class DataUbicacion extends AsyncTask<String, Void, String> {
         this.mMap = map;
     }
 
-    public DataUbicacion(Context context){
-        this.context = context;
-    }
-
-    public ArrayList<Ubicacion> getListaUbicaciones(){
-        return listaUbicaciones;
-    }
-
     @Override
     protected String doInBackground(String... strings) {
         String response = "";
@@ -85,15 +77,16 @@ public class DataUbicacion extends AsyncTask<String, Void, String> {
             if(strings[0] == "listar"){
 
                 usuario = new Usuario();
-                ubicacion = new Ubicacion();
 
                 listaUbicaciones = new ArrayList<Ubicacion>();
 
-                String query = "SELECT * FROM Ubicaciones WHERE Estado = '1';";
+                String query = "SELECT * FROM Ubicaciones WHERE Estado = 1";
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery(query);
 
                 while(rs.next()){
+                    ubicacion = new Ubicacion();
+
                     ubicacion.setId(rs.getInt("ID_Ubicacion"));
                     usuario.setId(rs.getInt("ID_Usuario"));
                     ubicacion.setUsuario(usuario);
@@ -109,10 +102,8 @@ public class DataUbicacion extends AsyncTask<String, Void, String> {
                     ubicacion.setEstado(rs.getBoolean("Estado"));
 
                     listaUbicaciones.add(ubicacion);
-                    System.out.println("data ubicacion: ");
-                    System.out.println(listaUbicaciones);
-                }
 
+                }
                 response = "Ubicaciones cargadas";
 
             }
@@ -145,7 +136,7 @@ public class DataUbicacion extends AsyncTask<String, Void, String> {
 
             case "Ubicaciones cargadas":
                 LatLng posicion;
-                for(Ubicacion u:listaUbicaciones){
+                for(Ubicacion u : listaUbicaciones){
                     posicion = new LatLng(u.getLatitud(),u.getLongitud());
                     mMap.addMarker(new MarkerOptions().position(posicion).title(String.valueOf(u.getId())));
                 }

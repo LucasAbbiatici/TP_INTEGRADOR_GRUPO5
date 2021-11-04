@@ -34,8 +34,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private ImageView icon_mascotas;
     private Usuario usuario;
     private DataUbicacion dataUbicacion;
-    private ArrayList<Ubicacion> listaUbicaciones;
-    private LatLng posicion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,45 +120,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         startActivity(i);
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
         dataUbicacion = new DataUbicacion(mMap, this);
-
-        /*
-        listaUbicaciones = new ArrayList<Ubicacion>();
-        dataUbicacion = new DataUbicacion(this);
         dataUbicacion.execute("listar");
-        listaUbicaciones = dataUbicacion.getListaUbicaciones();
-
-
-        System.out.println("activity: ");
-        System.out.println(listaUbicaciones);
-
-        for(int i=0;i<listaUbicaciones.size();i++){
-            System.out.println("activity: ");
-            System.out.println(listaUbicaciones.get(i).toString());
-
-            posicion = new LatLng(listaUbicaciones.get(i).getLatitud(),listaUbicaciones.get(i).getLongitud());
-            mMap.addMarker(new MarkerOptions().position(posicion).title(String.valueOf(listaUbicaciones.get(i).getId())));
-        }
-
-        /*
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        */
 
     }
 
