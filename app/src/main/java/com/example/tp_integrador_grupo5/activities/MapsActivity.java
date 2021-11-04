@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.tp_integrador_grupo5.R;
+import com.example.tp_integrador_grupo5.entidades.Usuario;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -26,6 +27,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private com.getbase.floatingactionbutton.FloatingActionButton fabUser;
     private com.getbase.floatingactionbutton.FloatingActionButton fabManual;
     private ImageView icon_mascotas;
+    private Usuario usuario;
 
 
     @Override
@@ -38,6 +40,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 
         // onClick fab agregar ubicacion actual
         fabActual = findViewById(R.id.fab_addActual);
@@ -94,6 +98,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void logout(View view){
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
+
+        finish();
     }
 
     public void redirec_modificarPass(View view){

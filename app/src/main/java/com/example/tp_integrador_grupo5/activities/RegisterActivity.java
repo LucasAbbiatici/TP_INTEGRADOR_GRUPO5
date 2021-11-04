@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.tp_integrador_grupo5.R;
-import com.example.tp_integrador_grupo5.conexion.Asynctask.DataUserActivity;
+import com.example.tp_integrador_grupo5.conexion.Asynctask.DataUser;
 import com.example.tp_integrador_grupo5.entidades.Usuario;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -18,6 +18,8 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText et_email2;
     private EditText et_pass;
     private EditText et_repetirpass;
+    private DataUser dataUser;
+    private Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,13 +42,13 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_LONG).show();
         }
         else{
-            Usuario usuario = new Usuario();
+            usuario = new Usuario();
             usuario.setNombre(et_nombre.getText().toString());
             usuario.setApellido(et_apellido.getText().toString());
             usuario.setEmail(et_email2.getText().toString());
             usuario.setPassword(et_pass.getText().toString());
-            DataUserActivity dataUserActivity = new DataUserActivity(usuario, this);
-            dataUserActivity.execute();
+            dataUser = new DataUser(usuario, this);
+            dataUser.execute("register");
         }
     }
 

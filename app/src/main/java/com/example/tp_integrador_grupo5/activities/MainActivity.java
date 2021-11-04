@@ -10,13 +10,22 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 import com.example.tp_integrador_grupo5.R;
+import com.example.tp_integrador_grupo5.conexion.Asynctask.DataUser;
+import com.example.tp_integrador_grupo5.entidades.Usuario;
+
+import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity {
 
     private AlertDialog.Builder builder;
     private AlertDialog alertDialog;
+    private EditText et_mail;
+    private EditText et_password;
+    private Usuario usuario;
+    private DataUser dataUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         dialogBuilder();
+
+        et_mail = (EditText) findViewById(R.id.et_mail);
+        et_password = (EditText) findViewById(R.id.et_password);
 
     }
 
@@ -56,8 +68,15 @@ public class MainActivity extends AppCompatActivity {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
             alertDialog.show();
         } else {
-            Intent i = new Intent(this, MapsActivity.class);
-            startActivity(i);
+
+            usuario = new Usuario();
+
+            usuario.setEmail(et_mail.getText().toString());
+            usuario.setPassword(et_password.getText().toString());
+
+            dataUser = new DataUser(usuario, this);
+            dataUser.execute("login");
+
         }
 
     }
