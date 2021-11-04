@@ -5,21 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.example.tp_integrador_grupo5.R;
+import com.example.tp_integrador_grupo5.conexion.DataListaUbicaciones;
 import com.example.tp_integrador_grupo5.conexion.DataUbicacion;
 import com.example.tp_integrador_grupo5.entidades.Ubicacion;
 import com.example.tp_integrador_grupo5.entidades.Usuario;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.tp_integrador_grupo5.databinding.ActivityMapsBinding;
 
 import java.util.ArrayList;
@@ -34,6 +31,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private ImageView icon_mascotas;
     private Usuario usuario;
     private DataUbicacion dataUbicacion;
+    private ArrayList<Ubicacion> listaUbicaciones;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,7 +123,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        dataUbicacion = new DataUbicacion(mMap, this);
+        dataUbicacion = new DataUbicacion(mMap,this);
         dataUbicacion.execute("listar");
 
     }

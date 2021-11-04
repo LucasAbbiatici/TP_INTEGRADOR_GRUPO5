@@ -4,11 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.provider.ContactsContract;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.UiThread;
+import androidx.appcompat.app.AlertDialog;
 
+import com.example.tp_integrador_grupo5.R;
 import com.example.tp_integrador_grupo5.activities.MapsActivity;
 import com.example.tp_integrador_grupo5.entidades.Ubicacion;
 import com.example.tp_integrador_grupo5.entidades.Usuario;
@@ -16,6 +23,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.clustering.ClusterItem;
 import com.google.maps.android.clustering.ClusterManager;
 
 import java.sql.Connection;
@@ -33,6 +41,8 @@ public class DataUbicacion extends AsyncTask<String, Void, String> {
     private ArrayList<Ubicacion> listaUbicaciones;
     private Usuario usuario;
     private GoogleMap mMap;
+    private int id;
+    private DataListaUbicaciones dlu;
 
     public DataUbicacion(Ubicacion ubicacion, Context context) {
         this.ubicacion = ubicacion;
@@ -148,7 +158,43 @@ public class DataUbicacion extends AsyncTask<String, Void, String> {
                 mMap.setOnCameraIdleListener(clusterManager);
                 mMap.setOnMarkerClickListener(clusterManager);
 
+                clusterManager.setOnClusterItemClickListener(new ClusterManager.OnClusterItemClickListener() {
+                    @Override
+                    public boolean onClusterItemClick(ClusterItem item) {
+                        id = Integer.parseInt(item.getTitle());
+                        armarDialog();
+                        return false;
+                    }
+                });
+
                 break;
         }
     }
+
+    private void armarDialog(){
+
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View popupWindow = inflater.inflate(R.layout.dialog_datosubicacion,null);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        builder.setView(popupWindow);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        ImageView ic_ninios = (ImageView) dialog.findViewById(R.id.ic_ninos);
+        ImageView ic_discapacitados = (ImageView) dialog.findViewById(R.id.ic_discapacitados);
+        ImageView ic_mascotas = (ImageView) dialog.findViewById(R.id.ic_mascotas);
+        ImageView ic_ancianos = (ImageView) dialog.findViewById(R.id.ic_ancianos);
+
+        TextView tv_cant = (TextView) dialog.findViewById(R.id.tv_variableCantPersonas);
+
+        EditText et_comentarios = (EditText) dialog.findViewById(R.id.et_comentariosGenerales);
+
+        dlu = new DataListaUbicaciones(context, ic_ninios, ic_discapacitados, ic_mascotas, ic_ancianos, tv_cant, et_comentarios, id);
+        dlu.execute("datosUbicacion");
+
+    }
+
 }
