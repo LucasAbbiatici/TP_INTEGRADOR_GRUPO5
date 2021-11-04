@@ -12,9 +12,11 @@ import androidx.annotation.UiThread;
 import com.example.tp_integrador_grupo5.activities.MapsActivity;
 import com.example.tp_integrador_grupo5.entidades.Ubicacion;
 import com.example.tp_integrador_grupo5.entidades.Usuario;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.clustering.ClusterManager;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -101,6 +103,9 @@ public class DataUbicacion extends AsyncTask<String, Void, String> {
                     ubicacion.setCant_reportes(rs.getInt("Cantidad_Reportes"));
                     ubicacion.setEstado(rs.getBoolean("Estado"));
 
+                    ubicacion.setPosition(new LatLng(ubicacion.getLatitud(), ubicacion.getLongitud()));
+                    ubicacion.setTitle(String.valueOf(ubicacion.getId()));
+
                     listaUbicaciones.add(ubicacion);
 
                 }
@@ -122,6 +127,7 @@ public class DataUbicacion extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(@NonNull String response){
+        System.out.println(response);
         switch(response) {
             case "Ubicacion agregada correctamente":
                 Toast.makeText(context, response, Toast.LENGTH_LONG).show();
@@ -135,11 +141,13 @@ public class DataUbicacion extends AsyncTask<String, Void, String> {
                 break;
 
             case "Ubicaciones cargadas":
-                LatLng posicion;
-                for(Ubicacion u : listaUbicaciones){
-                    posicion = new LatLng(u.getLatitud(),u.getLongitud());
-                    mMap.addMarker(new MarkerOptions().position(posicion).title(String.valueOf(u.getId())));
-                }
+                ClusterManager clusterManager = new ClusterManager<Ubicacion>(context, mMap);
+
+                clusterManager.addItems(listaUbicaciones);
+
+                mMap.setOnCameraIdleListener(clusterManager);
+                mMap.setOnMarkerClickListener(clusterManager);
+
                 break;
         }
     }

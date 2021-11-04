@@ -1,6 +1,12 @@
 package com.example.tp_integrador_grupo5.entidades;
 
-public class Ubicacion {
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.google.android.gms.maps.model.LatLng;
+import com.google.maps.android.clustering.ClusterItem;
+
+public class Ubicacion implements ClusterItem {
 
     private int id;
     private Usuario usuario;
@@ -14,6 +20,10 @@ public class Ubicacion {
     private String comentarios;
     private int cant_reportes;
     private boolean estado;
+
+    private LatLng position;
+    private String title;
+    private String snippet;
 
     public Ubicacion(){
         this.cant_reportes = 0;
@@ -148,5 +158,35 @@ public class Ubicacion {
                 ", cant_reportes=" + cant_reportes +
                 ", estado=" + estado +
                 '}';
+    }
+
+    @NonNull
+    @Override
+    public LatLng getPosition() {
+        return position;
+    }
+
+    @Nullable
+    @Override
+    public String getTitle() {
+        return title;
+    }
+
+    @Nullable
+    @Override
+    public String getSnippet() {
+        return snippet;
+    }
+
+    public void setPosition(LatLng position) {
+        this.position = position;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setSnippet(String snippet) {
+        this.snippet = snippet;
     }
 }
