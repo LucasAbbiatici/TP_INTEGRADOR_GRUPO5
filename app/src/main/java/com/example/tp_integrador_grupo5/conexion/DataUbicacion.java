@@ -2,11 +2,13 @@ package com.example.tp_integrador_grupo5.conexion;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -192,9 +194,19 @@ public class DataUbicacion extends AsyncTask<String, Void, String> {
 
         EditText et_comentarios = (EditText) dialog.findViewById(R.id.et_comentariosGenerales);
 
+        ImageButton btn_reportar = (ImageButton) dialog.findViewById(R.id.btn_report);
+
         dlu = new DataListaUbicaciones(context, ic_ninios, ic_discapacitados, ic_mascotas, ic_ancianos, tv_cant, et_comentarios, id);
         dlu.execute("datosUbicacion");
 
+        btn_reportar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                DataReporte dataReporte = new DataReporte(context,id);
+                dataReporte.execute("reportar");
+            }
+        });
     }
 
 }
