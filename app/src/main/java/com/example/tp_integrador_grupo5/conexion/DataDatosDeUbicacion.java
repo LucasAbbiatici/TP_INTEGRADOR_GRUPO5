@@ -17,7 +17,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class DataListaUbicaciones extends AsyncTask<String, Void, String> {
+public class DataDatosDeUbicacion extends AsyncTask<String, Void, String> {
 
     private Usuario usuario;
     private Ubicacion ubicacion;
@@ -27,7 +27,7 @@ public class DataListaUbicaciones extends AsyncTask<String, Void, String> {
     EditText et_comentarios;
     private int id;
 
-    public DataListaUbicaciones(Context context, ImageView ic_ninios, ImageView ic_discapacitados, ImageView ic_mascotas, ImageView ic_ancianos, TextView tv_cant, EditText et_comentarios, int id) {
+    public DataDatosDeUbicacion(Context context, ImageView ic_ninios, ImageView ic_discapacitados, ImageView ic_mascotas, ImageView ic_ancianos, TextView tv_cant, EditText et_comentarios, int id) {
         this.ic_ninios = ic_ninios;
         this.ic_discapacitados = ic_discapacitados;
         this.ic_mascotas = ic_mascotas;

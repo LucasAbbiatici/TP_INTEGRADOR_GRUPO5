@@ -1,12 +1,9 @@
 package com.example.tp_integrador_grupo5.conexion;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.Image;
 import android.os.AsyncTask;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -16,19 +13,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.UiThread;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.ActivityCompat;
 
 import com.example.tp_integrador_grupo5.R;
-import com.example.tp_integrador_grupo5.activities.MainActivity;
 import com.example.tp_integrador_grupo5.activities.MapsActivity;
 import com.example.tp_integrador_grupo5.entidades.Ubicacion;
 import com.example.tp_integrador_grupo5.entidades.Usuario;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.clustering.ClusterItem;
 import com.google.maps.android.clustering.ClusterManager;
 
@@ -39,8 +31,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import javax.xml.transform.Result;
-
 public class DataUbicacion extends AsyncTask<String, Void, String> {
     private Ubicacion ubicacion;
     private Context context;
@@ -48,7 +38,10 @@ public class DataUbicacion extends AsyncTask<String, Void, String> {
     private Usuario usuario;
     private GoogleMap mMap;
     private int idUbicacion;
-    private DataListaUbicaciones dlu;
+    private DataDatosDeUbicacion dlu;
+    private int idUsuario;
+    private int cant;
+    private TextView cant_ubicaciones;
 
     public DataUbicacion(Ubicacion ubicacion, Context context) {
         this.ubicacion = ubicacion;
@@ -59,6 +52,12 @@ public class DataUbicacion extends AsyncTask<String, Void, String> {
         this.context = context;
         this.mMap = map;
         this.usuario = usuario;
+    }
+
+    public DataUbicacion(Context context, int idUsuario, TextView cant_ubicaciones){
+        this.context = context;
+        this.idUsuario = idUsuario;
+        this.cant_ubicaciones = cant_ubicaciones;
     }
 
     @Override
@@ -130,6 +129,21 @@ public class DataUbicacion extends AsyncTask<String, Void, String> {
 
             }
 
+            if(strings[0] == "ubicacionesXusuario") {
+
+                String query = "SELECT COUNT(*) AS cant FROM Ubicaciones WHERE ID_Usuario = " + idUsuario;
+                Statement st = con.createStatement();
+
+                ResultSet rs = st.executeQuery(query);
+
+                if(rs.next()){
+                    cant = rs.getInt("cant");
+                }
+
+                response = "Cantidad de ubicaciones cargadas";
+
+            }
+
             con.close();
 
         }catch (Exception e){
@@ -175,6 +189,10 @@ public class DataUbicacion extends AsyncTask<String, Void, String> {
                 });
 
                 break;
+
+            case "Cantidad de ubicaciones cargadas":
+                cant_ubicaciones.setText(String.valueOf(cant));
+                break;
         }
     }
 
@@ -201,7 +219,7 @@ public class DataUbicacion extends AsyncTask<String, Void, String> {
 
         ImageButton btn_reportar = (ImageButton) dialog.findViewById(R.id.btn_report);
 
-        dlu = new DataListaUbicaciones(context, ic_ninios, ic_discapacitados, ic_mascotas, ic_ancianos, tv_cant, et_comentarios, idUbicacion);
+        dlu = new DataDatosDeUbicacion(context, ic_ninios, ic_discapacitados, ic_mascotas, ic_ancianos, tv_cant, et_comentarios, idUbicacion);
         dlu.execute("datosUbicacion");
 
         btn_reportar.setOnClickListener(new View.OnClickListener() {

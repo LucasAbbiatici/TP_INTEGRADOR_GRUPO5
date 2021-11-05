@@ -1,21 +1,18 @@
 package com.example.tp_integrador_grupo5.activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.tp_integrador_grupo5.R;
-import com.example.tp_integrador_grupo5.conexion.DataListaUbicaciones;
+import com.example.tp_integrador_grupo5.conexion.DataReporte;
 import com.example.tp_integrador_grupo5.conexion.DataUbicacion;
 import com.example.tp_integrador_grupo5.entidades.Ubicacion;
 import com.example.tp_integrador_grupo5.entidades.Usuario;
@@ -36,6 +33,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private ImageView icon_mascotas;
     private Usuario usuario;
     private DataUbicacion dataUbicacion;
+    private DataReporte dataReporte;
     private ArrayList<Ubicacion> listaUbicaciones;
     LocationManager locationManager;
 
@@ -79,6 +77,22 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 AlertDialog dialog = builder.create();
                 dialog.show();
 
+                TextView tv_infoMail = (TextView) dialog.findViewById(R.id.tv_infoMail);
+                TextView tv_infoNombre = (TextView) dialog.findViewById(R.id.tv_infoNombre);
+                TextView tv_infoApellido = (TextView) dialog.findViewById(R.id.tv_infoApellido);
+                TextView tv_reportes = (TextView) dialog.findViewById(R.id.tv_reportes);
+                TextView tv_ubicacionesAgregadas = (TextView) dialog.findViewById(R.id.tv_ubicacionesAgregadas);
+
+                tv_infoMail.setText(usuario.getEmail());
+                tv_infoNombre.setText(usuario.getNombre());
+                tv_infoApellido.setText(usuario.getApellido());
+
+                dataReporte = new DataReporte(MapsActivity.this, usuario.getId(), tv_reportes);
+                dataReporte.execute("reportesXusuario");
+
+                dataUbicacion = new DataUbicacion(MapsActivity.this, usuario.getId(), tv_ubicacionesAgregadas);
+                dataUbicacion.execute("ubicacionesXusuario");
+
             }
         });
 
@@ -87,9 +101,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         fabManual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //icon_mascotas = (ImageView) dialog.findViewById(R.id.ic_mascotas);
-                //icon_mascotas.setColorFilter(Color.GREEN);
 
                 Intent i = new Intent(getApplicationContext(), SeleccionarUbicacionActivity.class);
                 i.putExtra("usuario",usuario);

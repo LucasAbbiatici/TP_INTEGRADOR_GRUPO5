@@ -2,6 +2,7 @@ package com.example.tp_integrador_grupo5.conexion;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tp_integrador_grupo5.entidades.Ubicacion;
@@ -9,6 +10,8 @@ import com.example.tp_integrador_grupo5.entidades.Ubicacion;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 
 public class DataReporte extends AsyncTask<String, Void, String> {
@@ -16,11 +19,19 @@ public class DataReporte extends AsyncTask<String, Void, String> {
     private Context context;
     private int idUbicacion;
     private int idUsuario;
+    private TextView cant_reportes;
+    private int cant;
 
     public DataReporte(Context context, int idUbicacion, int idUsuario) {
         this.context = context;
         this.idUbicacion = idUbicacion;
         this.idUsuario = idUsuario;
+    }
+
+    public DataReporte(Context context, int idUsuario, TextView cant_reportes) {
+        this.context = context;
+        this.idUsuario = idUsuario;
+        this.cant_reportes = cant_reportes;
     }
 
     @Override
@@ -53,6 +64,21 @@ public class DataReporte extends AsyncTask<String, Void, String> {
 
             }
 
+            if(strings[0] == "reportesXusuario") {
+
+                String query = "SELECT COUNT(*) AS cant FROM Reportes WHERE ID_Usuario = " + idUsuario;
+                Statement st = con.createStatement();
+
+                ResultSet rs = st.executeQuery(query);
+
+                if(rs.next()){
+                    cant = rs.getInt("cant");
+                }
+
+                response = "Cantidad de reportes cargada";
+
+            }
+
             con.close();
 
         }catch (Exception e){
@@ -74,6 +100,10 @@ public class DataReporte extends AsyncTask<String, Void, String> {
 
         if(response == "Error en la conexion"){
             Toast.makeText(context, "Ya reportaste esta ubicación.", Toast.LENGTH_LONG).show();
+        }
+
+        if(response == "Cantidad de reportes cargada"){
+            cant_reportes.setText(String.valueOf(cant));
         }
 
     }
