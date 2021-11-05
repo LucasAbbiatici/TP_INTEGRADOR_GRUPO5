@@ -15,10 +15,12 @@ public class DataReporte extends AsyncTask<String, Void, String> {
 
     private Context context;
     private int idUbicacion;
+    private int idUsuario;
 
-    public DataReporte(Context context, int id) {
+    public DataReporte(Context context, int idUbicacion, int idUsuario) {
         this.context = context;
-        this.idUbicacion = id;
+        this.idUbicacion = idUbicacion;
+        this.idUsuario = idUsuario;
     }
 
     @Override
@@ -32,10 +34,18 @@ public class DataReporte extends AsyncTask<String, Void, String> {
 
             if(strings[0] == "reportar") {
 
-                String query = "UPDATE Ubicaciones SET Cantidad_Reportes = (Cantidad_Reportes + 1) WHERE ID_Ubicacion = ? ;";
-
+                String query = "INSERT INTO Reportes Values (?,?,1);";
                 PreparedStatement st = con.prepareStatement(query);
-                st.setInt(1,idUbicacion);
+
+                st.setInt(1, idUsuario);
+                st.setInt(2, idUbicacion);
+
+                st.executeUpdate();
+
+                String query2 = "UPDATE Ubicaciones SET Cantidad_Reportes = (Cantidad_Reportes + 1) WHERE ID_Ubicacion = ? ;";
+
+                st = con.prepareStatement(query2);
+                st.setInt(1, idUbicacion);
 
                 st.executeUpdate();
 
@@ -60,6 +70,10 @@ public class DataReporte extends AsyncTask<String, Void, String> {
 
         if(response == "Ubicacion reportada"){
             Toast.makeText(context, response, Toast.LENGTH_LONG).show();
+        }
+
+        if(response == "Error en la conexion"){
+            Toast.makeText(context, "Ya reportaste esta ubicación.", Toast.LENGTH_LONG).show();
         }
 
     }

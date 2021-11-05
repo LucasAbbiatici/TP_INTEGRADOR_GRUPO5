@@ -130,7 +130,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        dataUbicacion = new DataUbicacion(mMap,this);
+        dataUbicacion = new DataUbicacion(mMap, usuario,this);
         dataUbicacion.execute("listar");
 
     }

@@ -1,6 +1,8 @@
 package com.example.tp_integrador_grupo5.conexion;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.Image;
 import android.os.AsyncTask;
@@ -16,8 +18,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.UiThread;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
 
 import com.example.tp_integrador_grupo5.R;
+import com.example.tp_integrador_grupo5.activities.MainActivity;
 import com.example.tp_integrador_grupo5.activities.MapsActivity;
 import com.example.tp_integrador_grupo5.entidades.Ubicacion;
 import com.example.tp_integrador_grupo5.entidades.Usuario;
@@ -43,7 +47,7 @@ public class DataUbicacion extends AsyncTask<String, Void, String> {
     private ArrayList<Ubicacion> listaUbicaciones;
     private Usuario usuario;
     private GoogleMap mMap;
-    private int id;
+    private int idUbicacion;
     private DataListaUbicaciones dlu;
 
     public DataUbicacion(Ubicacion ubicacion, Context context) {
@@ -51,9 +55,10 @@ public class DataUbicacion extends AsyncTask<String, Void, String> {
         this.context = context;
     }
 
-    public DataUbicacion(GoogleMap map, Context context){
+    public DataUbicacion(GoogleMap map, Usuario usuario, Context context){
         this.context = context;
         this.mMap = map;
+        this.usuario = usuario;
     }
 
     @Override
@@ -90,7 +95,7 @@ public class DataUbicacion extends AsyncTask<String, Void, String> {
 
             if(strings[0] == "listar"){
 
-                usuario = new Usuario();
+                Usuario user = new Usuario();
 
                 listaUbicaciones = new ArrayList<Ubicacion>();
 
@@ -102,8 +107,8 @@ public class DataUbicacion extends AsyncTask<String, Void, String> {
                     ubicacion = new Ubicacion();
 
                     ubicacion.setId(rs.getInt("ID_Ubicacion"));
-                    usuario.setId(rs.getInt("ID_Usuario"));
-                    ubicacion.setUsuario(usuario);
+                    user.setId(rs.getInt("ID_Usuario"));
+                    ubicacion.setUsuario(user);
                     ubicacion.setLatitud(rs.getDouble("Latitud"));
                     ubicacion.setLongitud(rs.getDouble("Longitud"));
                     ubicacion.setCant_personas(rs.getInt("Cantidad_Personas"));
@@ -163,7 +168,7 @@ public class DataUbicacion extends AsyncTask<String, Void, String> {
                 clusterManager.setOnClusterItemClickListener(new ClusterManager.OnClusterItemClickListener() {
                     @Override
                     public boolean onClusterItemClick(ClusterItem item) {
-                        id = Integer.parseInt(item.getTitle());
+                        idUbicacion = Integer.parseInt(item.getTitle());
                         armarDialog();
                         return false;
                     }
@@ -196,15 +201,31 @@ public class DataUbicacion extends AsyncTask<String, Void, String> {
 
         ImageButton btn_reportar = (ImageButton) dialog.findViewById(R.id.btn_report);
 
-        dlu = new DataListaUbicaciones(context, ic_ninios, ic_discapacitados, ic_mascotas, ic_ancianos, tv_cant, et_comentarios, id);
+        dlu = new DataListaUbicaciones(context, ic_ninios, ic_discapacitados, ic_mascotas, ic_ancianos, tv_cant, et_comentarios, idUbicacion);
         dlu.execute("datosUbicacion");
 
         btn_reportar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AlertDialog alertaReporte;
 
-                DataReporte dataReporte = new DataReporte(context,id);
-                dataReporte.execute("reportar");
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setMessage("Por favor, sólo reporte la ubicación si la persona no se encuentra en el lugar.").setPositiveButton("ACEPTAR", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        DataReporte dataReporte = new DataReporte(context, idUbicacion ,usuario.getId());
+                        dataReporte.execute("reportar");
+                    }
+                }).setNegativeButton("CANCELAR", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                }).setTitle("¿QUIERE REPORTAR ESTA UBICACION?");
+
+                alertaReporte = builder.create();
+                alertaReporte.show();
+                
             }
         });
     }
