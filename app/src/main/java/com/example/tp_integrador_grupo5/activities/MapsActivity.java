@@ -1,9 +1,14 @@
 package com.example.tp_integrador_grupo5.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +37,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private Usuario usuario;
     private DataUbicacion dataUbicacion;
     private ArrayList<Ubicacion> listaUbicaciones;
+    LocationManager locationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +58,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(view.getContext(), AgregarUbicacionActivity.class);
+
                 view.getContext().startActivity(i);
             }
         });

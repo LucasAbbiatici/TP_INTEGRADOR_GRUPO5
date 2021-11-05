@@ -86,8 +86,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@drawable/button_shape"
-            android:textAllCaps="false"
+            android:onClick="onClickCambiarPass"
             android:text="@string/btn_Modificar"
-            android:textSize="18sp"/>
+            android:textAllCaps="false"
+            android:textSize="18sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

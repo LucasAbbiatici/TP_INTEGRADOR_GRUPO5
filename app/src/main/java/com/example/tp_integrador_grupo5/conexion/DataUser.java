@@ -21,8 +21,16 @@ public class DataUser extends AsyncTask<String, Void, String> {
 
     private Usuario usuario;
     private Context context;
+    private String newPass;
+    private int id_usuario;
 
     public DataUser(Usuario usuario, Context context) {
+        this.usuario = usuario;
+        this.context = context;
+    }
+
+    public DataUser(String pass, Usuario usuario, Context context){
+        this.newPass = pass;
         this.usuario = usuario;
         this.context = context;
     }
@@ -68,6 +76,19 @@ public class DataUser extends AsyncTask<String, Void, String> {
 
             }
 
+            if(strings[0] == "modificar"){
+
+                PreparedStatement statement = con.prepareStatement("UPDATE Usuarios SET Password = ? WHERE ID_Usuario = ? ;");
+                statement.setString(1, newPass);
+                statement.setInt(2, usuario.getId());
+
+                statement.executeUpdate();
+                response = "Contraseña modificada exitosamente";
+
+                usuario.setPassword(newPass);
+
+            }
+
             con.close();
 
         }
@@ -99,6 +120,13 @@ public class DataUser extends AsyncTask<String, Void, String> {
 
             case "Email o contraseña incorrectos" :
                 Toast.makeText(context, response, Toast.LENGTH_LONG).show();
+                break;
+
+            case "Contraseña modificada exitosamente" :
+                Toast.makeText(context, response, Toast.LENGTH_LONG).show();
+                i = new Intent(context, MapsActivity.class);
+                i.putExtra("usuario", usuario);
+                context.startActivity(i);
                 break;
 
             case "Error en la conexion a la base de datos" :
