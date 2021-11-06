@@ -2,24 +2,32 @@ package com.example.tp_integrador_grupo5.activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tp_integrador_grupo5.R;
 import com.example.tp_integrador_grupo5.conexion.DataReporte;
 import com.example.tp_integrador_grupo5.conexion.DataUbicacion;
 import com.example.tp_integrador_grupo5.entidades.Ubicacion;
 import com.example.tp_integrador_grupo5.entidades.Usuario;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.example.tp_integrador_grupo5.databinding.ActivityMapsBinding;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.util.ArrayList;
 
@@ -30,12 +38,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private com.getbase.floatingactionbutton.FloatingActionButton fabActual;
     private com.getbase.floatingactionbutton.FloatingActionButton fabUser;
     private com.getbase.floatingactionbutton.FloatingActionButton fabManual;
-    private ImageView icon_mascotas;
     private Usuario usuario;
     private DataUbicacion dataUbicacion;
     private DataReporte dataReporte;
-    private ArrayList<Ubicacion> listaUbicaciones;
-    LocationManager locationManager;
+
+    private FusedLocationProviderClient fusedLocationClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,14 +57,34 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
         // onClick fab agregar ubicacion actual
         fabActual = findViewById(R.id.fab_addActual);
         fabActual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(view.getContext(), AgregarUbicacionActivity.class);
-
-                view.getContext().startActivity(i);
+                if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                    fusedLocationClient.getLastLocation()
+                            .addOnSuccessListener(MapsActivity.this, new OnSuccessListener<Location>() {
+                                @Override
+                                public void onSuccess(Location location) {
+                                    if (location != null) {
+                                        Intent i = new Intent(MapsActivity.this, AgregarUbicacionActivity.class);
+                                        double latitude = (double) location.getLatitude();
+                                        double longitude = (double) location.getLongitude();
+                                        i.putExtra("latitud",latitude);
+                                        i.putExtra("longitud",longitude);
+                                        i.putExtra("usuario",usuario);
+                                        startActivity(i);
+                                    } else {
+                                        Toast.makeText(MapsActivity.this, "No se pudo encontrar la ubicación", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            });
+                } else {
+                    Toast.makeText(MapsActivity.this, "La aplicación no tiene los permisos necesarios", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -68,7 +95,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onClick(View view) {
 
                 LayoutInflater inflater = LayoutInflater.from(MapsActivity.this);
-                View popupWindow = inflater.inflate(R.layout.dialog_usuario,null);
+                View popupWindow = inflater.inflate(R.layout.dialog_usuario, null);
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(MapsActivity.this);
 
@@ -103,7 +130,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onClick(View v) {
 
                 Intent i = new Intent(getApplicationContext(), SeleccionarUbicacionActivity.class);
-                i.putExtra("usuario",usuario);
+                i.putExtra("usuario", usuario);
                 startActivity(i);
 
             }
@@ -112,27 +139,30 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     public void accionCompartir(View view) {
-        Intent sendIntent = new Intent();
-        sendIntent.setAction(Intent.ACTION_SEND);
-        startActivity(sendIntent);
+        Intent compartir = new Intent(android.content.Intent.ACTION_SEND);
+        compartir.setType("text/plain");
+        String mensaje ="Te recomiendo esta App para encontrar trabajo y obtener descuentos.";
+        compartir.putExtra(android.content.Intent.EXTRA_SUBJECT, "Empleos Baja App");
+        compartir.putExtra(android.content.Intent.EXTRA_TEXT, mensaje);
+        startActivity(Intent.createChooser(compartir, "Compartir vía"));
     }
 
-    public void logout(View view){
+    public void logout(View view) {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
 
         finish();
     }
 
-    public void redirec_modificarPass(View view){
+    public void redirec_modificarPass(View view) {
         Intent i = new Intent(this, CambiarContraseniaActivity.class);
-        i.putExtra("usuario",usuario);
+        i.putExtra("usuario", usuario);
         startActivity(i);
     }
 
-    public void redirec_agregarUbicacion(View view){
+    public void redirec_agregarUbicacion(View view) {
         Intent i = new Intent(this, AgregarUbicacionActivity.class);
-        i.putExtra("usuario",usuario);
+        i.putExtra("usuario", usuario);
         startActivity(i);
     }
 
@@ -141,7 +171,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        dataUbicacion = new DataUbicacion(mMap, usuario,this);
+        dataUbicacion = new DataUbicacion(mMap, usuario, this);
         dataUbicacion.execute("listar");
 
     }
