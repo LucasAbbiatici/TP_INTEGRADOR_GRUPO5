@@ -1,7 +1,9 @@
 package com.example.tp_integrador_grupo5.conexion;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -38,6 +40,10 @@ public class DataDatosDeUbicacion extends AsyncTask<String, Void, String> {
         this.id = id;
     }
 
+    public DataDatosDeUbicacion(Context context, int id){
+        this.context = context;
+        this.id = id;
+    }
 
     @Override
     protected String doInBackground(String... strings) {
@@ -80,8 +86,23 @@ public class DataDatosDeUbicacion extends AsyncTask<String, Void, String> {
                 response = "Datos de ubicacion cargados";
 
             }
-                con.close();
-                return response;
+
+            if (strings[0] == "datosCompartir") {
+                String query = "SELECT * FROM Ubicaciones WHERE ID_Ubicacion = " + id;
+                Statement st = con.createStatement();
+                ResultSet rs = st.executeQuery(query);
+
+                if (rs.next()) {
+                    ubicacion = new Ubicacion();
+                    ubicacion.setLatitud(rs.getDouble("Latitud"));
+                    ubicacion.setLongitud(rs.getDouble("Longitud"));
+                }
+
+                response = "Compartir";
+            }
+
+            con.close();
+            return response;
 
 
             } catch(Exception e){
@@ -95,6 +116,8 @@ public class DataDatosDeUbicacion extends AsyncTask<String, Void, String> {
 
         @Override
         protected void onPostExecute (String response){
+            Double lat = ubicacion.getLatitud();
+            Double lng = ubicacion.getLongitud();
 
             if(response.equals("Datos de ubicacion cargados")){
                 if(ubicacion.isNinios()) ic_ninios.setColorFilter(Color.GREEN);
@@ -106,6 +129,22 @@ public class DataDatosDeUbicacion extends AsyncTask<String, Void, String> {
 
                 et_comentarios.setText(ubicacion.getComentarios());
 
+            }
+            if (response.equals("Compartir")){
+                Intent compartir = new Intent(android.content.Intent.ACTION_SEND);
+                compartir.setType("text/plain");
+                String link = "http://www.google.com/maps/place/" + lat + "," + lng;
+                String mensaje ="Esta persona necesita tu ayuda! " + link;
+                compartir.putExtra(android.content.Intent.EXTRA_TEXT, mensaje);
+                context.startActivity(Intent.createChooser(compartir, "Compartir vía"));
+
+            }
+
+            if (response.equals("Maps")){
+                Uri gmmIntentUri = Uri.parse("http://www.google.com/maps/place/" + lat + "," + lng);
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                context.startActivity(mapIntent);
             }
 
         }

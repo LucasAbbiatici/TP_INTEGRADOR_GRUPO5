@@ -138,15 +138,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
-    public void accionCompartir(View view) {
-        Intent compartir = new Intent(android.content.Intent.ACTION_SEND);
-        compartir.setType("text/plain");
-        String mensaje ="Te recomiendo esta App para encontrar trabajo y obtener descuentos.";
-        compartir.putExtra(android.content.Intent.EXTRA_SUBJECT, "Empleos Baja App");
-        compartir.putExtra(android.content.Intent.EXTRA_TEXT, mensaje);
-        startActivity(Intent.createChooser(compartir, "Compartir vía"));
-    }
-
     public void logout(View view) {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);

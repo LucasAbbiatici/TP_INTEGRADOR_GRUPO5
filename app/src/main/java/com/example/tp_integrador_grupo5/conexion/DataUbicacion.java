@@ -219,6 +219,8 @@ public class DataUbicacion extends AsyncTask<String, Void, String> {
 
         ImageButton btn_reportar = (ImageButton) dialog.findViewById(R.id.btn_report);
 
+        ImageButton btn_share = (ImageButton) dialog.findViewById(R.id.btn_share);
+
         dlu = new DataDatosDeUbicacion(context, ic_ninios, ic_discapacitados, ic_mascotas, ic_ancianos, tv_cant, et_comentarios, idUbicacion);
         dlu.execute("datosUbicacion");
 
@@ -244,6 +246,15 @@ public class DataUbicacion extends AsyncTask<String, Void, String> {
                 alertaReporte = builder.create();
                 alertaReporte.show();
                 
+            }
+        });
+
+
+        btn_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               dlu = new DataDatosDeUbicacion(context, idUbicacion);
+               dlu.execute("datosCompartir");
             }
         });
     }

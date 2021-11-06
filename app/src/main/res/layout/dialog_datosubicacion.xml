@@ -132,7 +132,6 @@
                 android:background="#00FFFFFF"
                 android:clickable="true"
                 android:focusable="true"
-                android:onClick="accionCompartir"
                 app:srcCompat="@drawable/ic_share"
                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
