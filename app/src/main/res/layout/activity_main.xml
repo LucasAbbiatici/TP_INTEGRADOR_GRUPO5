@@ -44,6 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:ems="10"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
             android:hint="@string/tv_pass"
             android:inputType="textPassword"
             android:minHeight="48dp" />

@@ -42,7 +42,9 @@
             android:ems="10"
             android:inputType="textPassword"
             android:minHeight="48dp"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
             tools:ignore="SpeakableTextPresentCheck"/>
+
 
         <TextView
             android:id="@+id/tv_nuevaContra"
@@ -58,6 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
             android:inputType="textPassword"
             android:minHeight="48dp"
             tools:ignore="SpeakableTextPresentCheck"/>
@@ -87,6 +90,7 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/button_shape"
             android:onClick="onClickCambiarPass"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
             android:text="@string/btn_Modificar"
             android:textAllCaps="false"
             android:textSize="18sp" />

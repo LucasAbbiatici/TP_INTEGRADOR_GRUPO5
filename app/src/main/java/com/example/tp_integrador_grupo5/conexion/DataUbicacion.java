@@ -257,6 +257,7 @@ public class DataUbicacion extends AsyncTask<String, Void, String> {
                dlu.execute("datosCompartir");
             }
         });
+
     }
 
 }
