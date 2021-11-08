@@ -48,9 +48,12 @@ public class AgregarUbicacionActivity extends AppCompatActivity {
 
     public void onClickAgregarUbicacion(View view){
 
-        if(et_cant.getText().toString().equals("0")){
+        if(et_cant.getText().toString().isEmpty()){
+            Toast.makeText(this, "Porfavor, complete el campo cantidad de personas.", Toast.LENGTH_SHORT).show();
+        } else if (et_cant.getText().toString().equals("0")){
             Toast.makeText(this, "La cantidad de personas no puede ser 0.", Toast.LENGTH_SHORT).show();
-        } else {
+        }
+        else {
             ubicacion = new Ubicacion();
 
             ubicacion.setUsuario(usuario);

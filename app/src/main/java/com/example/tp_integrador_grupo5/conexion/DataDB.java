@@ -5,9 +5,9 @@ public class DataDB {
     //Información de la BD
     public static String host="sql10.freesqldatabase.com";
     public static String port="3306";
-    public static String nameBD="sql10448656";
-    public static String user="sql10448656";
-    public static String pass="itPS3z8TJ7";
+    public static String nameBD="sql10449713";
+    public static String user="sql10449713";
+    public static String pass="zLkZx2yT2b";
 
     //Información para la conexion
     public static String urlMySQL = "jdbc:mysql://" + host + ":" + port + "/" + nameBD;
