@@ -42,6 +42,10 @@ public class CambiarContraseniaActivity extends AppCompatActivity {
     }
 
     private boolean validarContraseña(){
+        if(ControlIsEmpty()){
+            Toast.makeText(this, "Complete los campos", Toast.LENGTH_SHORT).show();
+            return false;
+        }
         //valido que la contraseña actual introducida sea valida
         if(!et_contraseñaActual.getText().toString().equals(usuario.getPassword())){
             Toast.makeText(this, "contraseña actual erronea", Toast.LENGTH_SHORT).show();
@@ -61,4 +65,11 @@ public class CambiarContraseniaActivity extends AppCompatActivity {
         return true;
     }
 
+    private boolean ControlIsEmpty(){
+        boolean isEmpty = false;
+        if ( et_contraseñaActual.getText().toString().isEmpty() ) isEmpty = true;
+        if ( et_contraseñaRepetir.getText().toString().isEmpty() ) isEmpty = true;
+        if ( et_contraseñaNueva.getText().toString().isEmpty() ) isEmpty = true;
+        return isEmpty;
+    }
 }
