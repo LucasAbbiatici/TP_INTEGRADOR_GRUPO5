@@ -31,7 +31,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.util.ArrayList;
 
-public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, IReloadMapa {
 
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
@@ -114,7 +114,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 tv_infoNombre.setText(usuario.getNombre());
                 tv_infoApellido.setText(usuario.getApellido());
 
-                dataReporte = new DataReporte(MapsActivity.this, usuario.getId(), tv_reportes);
+                dataReporte = new DataReporte(MapsActivity.this, usuario, tv_reportes);
                 dataReporte.execute("reportesXusuario");
 
                 dataUbicacion = new DataUbicacion(MapsActivity.this, usuario.getId(), tv_ubicacionesAgregadas);
@@ -139,10 +139,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     public void logout(View view) {
+        finish();
+
+        overridePendingTransition(0,0);
+
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
 
-        finish();
+        overridePendingTransition(0,0);
     }
 
     public void redirec_modificarPass(View view) {
@@ -162,9 +166,20 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        dataUbicacion = new DataUbicacion(mMap, usuario, this);
+        dataUbicacion = new DataUbicacion(mMap, usuario, this, this::reloadMapa);
         dataUbicacion.execute("listar");
 
     }
 
+    @Override
+    public void reloadMapa() {
+        finish();
+
+        overridePendingTransition(0,0);
+
+        Intent i = new Intent(getIntent());
+        startActivity(i);
+
+        overridePendingTransition(0,0);
+    }
 }

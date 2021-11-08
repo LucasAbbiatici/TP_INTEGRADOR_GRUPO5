@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
 import com.example.tp_integrador_grupo5.R;
+import com.example.tp_integrador_grupo5.activities.IReloadMapa;
 import com.example.tp_integrador_grupo5.activities.MapsActivity;
 import com.example.tp_integrador_grupo5.entidades.Ubicacion;
 import com.example.tp_integrador_grupo5.entidades.Usuario;
@@ -42,16 +43,18 @@ public class DataUbicacion extends AsyncTask<String, Void, String> {
     private int idUsuario;
     private int cant;
     private TextView cant_ubicaciones;
+    private IReloadMapa rm;
 
     public DataUbicacion(Ubicacion ubicacion, Context context) {
         this.ubicacion = ubicacion;
         this.context = context;
     }
 
-    public DataUbicacion(GoogleMap map, Usuario usuario, Context context){
+    public DataUbicacion(GoogleMap map, Usuario usuario, Context context, IReloadMapa rm){
         this.context = context;
         this.mMap = map;
         this.usuario = usuario;
+        this.rm = rm;
     }
 
     public DataUbicacion(Context context, int idUsuario, TextView cant_ubicaciones){
@@ -193,8 +196,6 @@ public class DataUbicacion extends AsyncTask<String, Void, String> {
                     }
                 });
 
-
-
                 break;
 
             case "Cantidad de ubicaciones cargadas":
@@ -240,7 +241,7 @@ public class DataUbicacion extends AsyncTask<String, Void, String> {
                 builder.setMessage("Por favor, sólo reporte la ubicación si la persona no se encuentra en el lugar.").setPositiveButton("ACEPTAR", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        DataReporte dataReporte = new DataReporte(context, idUbicacion ,usuario.getId());
+                        DataReporte dataReporte = new DataReporte(context, idUbicacion ,usuario, rm);
                         dataReporte.execute("reportar");
                     }
                 }).setNegativeButton("CANCELAR", new DialogInterface.OnClickListener() {

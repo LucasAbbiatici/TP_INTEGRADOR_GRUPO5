@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.example.tp_integrador_grupo5.R;
 import com.example.tp_integrador_grupo5.conexion.DataUbicacion;
@@ -47,20 +48,24 @@ public class AgregarUbicacionActivity extends AppCompatActivity {
 
     public void onClickAgregarUbicacion(View view){
 
-        ubicacion = new Ubicacion();
+        if(et_cant.getText().toString().equals("0")){
+            Toast.makeText(this, "La cantidad de personas no puede ser 0.", Toast.LENGTH_SHORT).show();
+        } else {
+            ubicacion = new Ubicacion();
 
-        ubicacion.setUsuario(usuario);
-        ubicacion.setLatitud(lat);
-        ubicacion.setLongitud(lng);
-        ubicacion.setCant_personas(Integer.parseInt(et_cant.getText().toString()));
-        ubicacion.setMascotas(sw_mascotas.isChecked());
-        ubicacion.setAncianos(sw_ancianos.isChecked());
-        ubicacion.setNinios(sw_ninos.isChecked());
-        ubicacion.setDiscapacitados(sw_discapacitados.isChecked());
-        ubicacion.setComentarios(et_comentarios.getText().toString());
+            ubicacion.setUsuario(usuario);
+            ubicacion.setLatitud(lat);
+            ubicacion.setLongitud(lng);
+            ubicacion.setCant_personas(Integer.parseInt(et_cant.getText().toString()));
+            ubicacion.setMascotas(sw_mascotas.isChecked());
+            ubicacion.setAncianos(sw_ancianos.isChecked());
+            ubicacion.setNinios(sw_ninos.isChecked());
+            ubicacion.setDiscapacitados(sw_discapacitados.isChecked());
+            ubicacion.setComentarios(et_comentarios.getText().toString());
 
-        dataUbicacion = new DataUbicacion(ubicacion, this);
-        dataUbicacion.execute("agregar");
+            dataUbicacion = new DataUbicacion(ubicacion, this);
+            dataUbicacion.execute("agregar");
+        }
 
     }
 

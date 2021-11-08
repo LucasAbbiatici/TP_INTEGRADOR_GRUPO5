@@ -41,7 +41,9 @@ public class RegisterActivity extends AppCompatActivity {
         else if (!et_pass.getText().toString().equals(et_repetirpass.getText().toString())){
             Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_LONG).show();
         }
-        else{
+        else if(et_pass.getText().length() < 8 || et_repetirpass.getText().length() < 8) {
+            Toast.makeText(this, "Las contraseñas deben contener 8 caracteres o mas", Toast.LENGTH_SHORT).show();
+        } else {
             usuario = new Usuario();
             usuario.setNombre(et_nombre.getText().toString());
             usuario.setApellido(et_apellido.getText().toString());

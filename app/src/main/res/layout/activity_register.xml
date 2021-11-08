@@ -38,7 +38,7 @@
         <EditText
             android:id="@+id/et_nombre"
             android:layout_width="match_parent"
-            android:digits="abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
+            android:digits="abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ "
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
@@ -58,7 +58,7 @@
             android:id="@+id/et_apellido"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:digits="abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
+            android:digits="abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ "
             android:ems="10"
             android:inputType="textPersonName"
             android:minHeight="48dp"

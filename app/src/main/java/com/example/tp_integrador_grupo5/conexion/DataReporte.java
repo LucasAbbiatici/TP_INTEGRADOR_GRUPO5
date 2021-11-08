@@ -6,8 +6,11 @@ import android.os.AsyncTask;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tp_integrador_grupo5.activities.IReloadMapa;
 import com.example.tp_integrador_grupo5.activities.MapsActivity;
 import com.example.tp_integrador_grupo5.entidades.Ubicacion;
+import com.example.tp_integrador_grupo5.entidades.Usuario;
+import com.google.android.gms.maps.GoogleMap;
 import com.mysql.fabric.xmlrpc.base.Data;
 
 import java.sql.Connection;
@@ -21,19 +24,22 @@ public class DataReporte extends AsyncTask<String, Void, String> {
 
     private Context context;
     private int idUbicacion;
-    private int idUsuario;
     private TextView cant_reportes;
     private int cant;
+    private DataUbicacion du;
+    private Usuario usuario;
+    private IReloadMapa rm;
 
-    public DataReporte(Context context, int idUbicacion, int idUsuario) {
+    public DataReporte(Context context, int idUbicacion, Usuario usuario, IReloadMapa rm) {
         this.context = context;
         this.idUbicacion = idUbicacion;
-        this.idUsuario = idUsuario;
+        this.usuario = usuario;
+        this.rm = rm;
     }
 
-    public DataReporte(Context context, int idUsuario, TextView cant_reportes) {
+    public DataReporte(Context context, Usuario usuario, TextView cant_reportes) {
         this.context = context;
-        this.idUsuario = idUsuario;
+        this.usuario = usuario;
         this.cant_reportes = cant_reportes;
     }
 
@@ -50,7 +56,7 @@ public class DataReporte extends AsyncTask<String, Void, String> {
                 String query = "INSERT INTO Reportes Values (?,?,1);";
                 PreparedStatement pst = con.prepareStatement(query);
 
-                pst.setInt(1, idUsuario);
+                pst.setInt(1, usuario.getId());
                 pst.setInt(2, idUbicacion);
 
                 pst.executeUpdate();
@@ -86,7 +92,7 @@ public class DataReporte extends AsyncTask<String, Void, String> {
 
             if(strings[0] == "reportesXusuario") {
 
-                String query = "SELECT COUNT(*) AS cant FROM Reportes WHERE ID_Usuario = " + idUsuario;
+                String query = "SELECT COUNT(*) AS cant FROM Reportes WHERE ID_Usuario = " + usuario.getId();
                 Statement st = con.createStatement();
 
                 ResultSet rs = st.executeQuery(query);
@@ -116,9 +122,7 @@ public class DataReporte extends AsyncTask<String, Void, String> {
 
         if(response == "Ubicacion reportada"){
             Toast.makeText(context, response, Toast.LENGTH_LONG).show();
-
-
-
+            rm.reloadMapa();
         }
 
         if(response == "Error en la conexion"){
