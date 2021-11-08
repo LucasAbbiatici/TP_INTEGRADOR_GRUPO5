@@ -60,6 +60,11 @@ public class DataUbicacion extends AsyncTask<String, Void, String> {
         this.cant_ubicaciones = cant_ubicaciones;
     }
 
+    public DataUbicacion(Context context, int idUbicacion){
+        this.context = context;
+        this.idUbicacion = idUbicacion;
+    }
+
     @Override
     protected String doInBackground(String... strings) {
         String response = "";
@@ -188,6 +193,8 @@ public class DataUbicacion extends AsyncTask<String, Void, String> {
                     }
                 });
 
+
+
                 break;
 
             case "Cantidad de ubicaciones cargadas":
@@ -218,8 +225,8 @@ public class DataUbicacion extends AsyncTask<String, Void, String> {
         EditText et_comentarios = (EditText) dialog.findViewById(R.id.et_comentariosGenerales);
 
         ImageButton btn_reportar = (ImageButton) dialog.findViewById(R.id.btn_report);
-
         ImageButton btn_share = (ImageButton) dialog.findViewById(R.id.btn_share);
+        ImageButton btn_maps = (ImageButton) dialog.findViewById(R.id.btn_maps);
 
         dlu = new DataDatosDeUbicacion(context, ic_ninios, ic_discapacitados, ic_mascotas, ic_ancianos, tv_cant, et_comentarios, idUbicacion);
         dlu.execute("datosUbicacion");
@@ -249,12 +256,35 @@ public class DataUbicacion extends AsyncTask<String, Void, String> {
             }
         });
 
-
         btn_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                dlu = new DataDatosDeUbicacion(context, idUbicacion);
-               dlu.execute("datosCompartir");
+               dlu.execute("Compartir");
+            }
+        });
+
+        btn_maps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                AlertDialog.Builder builder2 = new AlertDialog.Builder(context);
+
+                builder2.setMessage("Se abrirá la aplicación Google Maps. ¿Desea continuar?").setPositiveButton("ACEPTAR", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dlu = new DataDatosDeUbicacion(context, idUbicacion);
+                        dlu.execute("Maps");
+                    }
+                }).setNegativeButton("CANCELAR", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                }).setTitle("Ir a Google Maps");
+
+                AlertDialog dialog2 = builder2.create();
+                dialog2.show();
             }
         });
 

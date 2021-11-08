@@ -1,11 +1,14 @@
 package com.example.tp_integrador_grupo5.conexion;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tp_integrador_grupo5.activities.MapsActivity;
 import com.example.tp_integrador_grupo5.entidades.Ubicacion;
+import com.mysql.fabric.xmlrpc.base.Data;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -37,7 +40,6 @@ public class DataReporte extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... strings) {
 
-
         String response = "";
         try{
             Class.forName("com.mysql.jdbc.Driver");
@@ -46,19 +48,37 @@ public class DataReporte extends AsyncTask<String, Void, String> {
             if(strings[0] == "reportar") {
 
                 String query = "INSERT INTO Reportes Values (?,?,1);";
-                PreparedStatement st = con.prepareStatement(query);
+                PreparedStatement pst = con.prepareStatement(query);
 
-                st.setInt(1, idUsuario);
-                st.setInt(2, idUbicacion);
+                pst.setInt(1, idUsuario);
+                pst.setInt(2, idUbicacion);
 
-                st.executeUpdate();
+                pst.executeUpdate();
 
                 String query2 = "UPDATE Ubicaciones SET Cantidad_Reportes = (Cantidad_Reportes + 1) WHERE ID_Ubicacion = ? ;";
 
-                st = con.prepareStatement(query2);
-                st.setInt(1, idUbicacion);
+                pst = con.prepareStatement(query2);
+                pst.setInt(1, idUbicacion);
 
-                st.executeUpdate();
+                pst.executeUpdate();
+
+                String query3 = "SELECT Cantidad_Reportes FROM Ubicaciones WHERE ID_Ubicacion = " + idUbicacion;
+                Statement st2 = con.createStatement();
+                ResultSet rs = st2.executeQuery(query3);
+
+                if(rs.next()){
+                    if(rs.getInt("Cantidad_Reportes") == 10){
+
+                        String query4 = "UPDATE Ubicaciones SET Estado = 0 WHERE ID_Ubicacion = ? ;";
+                        PreparedStatement pst2 = con.prepareStatement(query4);
+
+                        pst2.setInt(1, idUbicacion);
+
+                        pst2.executeUpdate();
+
+                    }
+                }
+
 
                 response = "Ubicacion reportada";
 
@@ -96,6 +116,9 @@ public class DataReporte extends AsyncTask<String, Void, String> {
 
         if(response == "Ubicacion reportada"){
             Toast.makeText(context, response, Toast.LENGTH_LONG).show();
+
+
+
         }
 
         if(response == "Error en la conexion"){

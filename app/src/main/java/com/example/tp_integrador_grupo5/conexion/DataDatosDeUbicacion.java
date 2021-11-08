@@ -87,7 +87,7 @@ public class DataDatosDeUbicacion extends AsyncTask<String, Void, String> {
 
             }
 
-            if (strings[0] == "datosCompartir") {
+            if (strings[0] == "Compartir" || strings[0] == "Maps") {
                 String query = "SELECT * FROM Ubicaciones WHERE ID_Ubicacion = " + id;
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery(query);
@@ -98,7 +98,7 @@ public class DataDatosDeUbicacion extends AsyncTask<String, Void, String> {
                     ubicacion.setLongitud(rs.getDouble("Longitud"));
                 }
 
-                response = "Compartir";
+                response = strings[0];
             }
 
             con.close();
