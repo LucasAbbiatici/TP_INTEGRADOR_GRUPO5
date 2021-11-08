@@ -50,6 +50,7 @@ public class DataUser extends AsyncTask<String, Void, String> {
 
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery("SELECT * FROM Usuarios WHERE Email = '" + usuario.getEmail() + "' ;");
+
                 if(rs.next()){
                     response = "Email ya utilizado";
                 }else{
