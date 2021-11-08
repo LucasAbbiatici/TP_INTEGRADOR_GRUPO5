@@ -17,6 +17,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import javax.xml.transform.Result;
+
 public class DataUser extends AsyncTask<String, Void, String> {
 
     private Usuario usuario;
@@ -46,15 +48,21 @@ public class DataUser extends AsyncTask<String, Void, String> {
 
             if(strings[0] == "register"){
 
-                PreparedStatement statement = con.prepareStatement("INSERT INTO Usuarios (Nombre, Apellido, Email, " +
-                        "Password) VALUES (? ,? ,? ,? )");
-                statement.setString(1, usuario.getNombre());
-                statement.setString(2, usuario.getApellido());
-                statement.setString(3, usuario.getEmail());
-                statement.setString(4, usuario.getPassword());
+                Statement st = con.createStatement();
+                ResultSet rs = st.executeQuery("SELECT * FROM Usuarios WHERE Email = '" + usuario.getEmail() + "' ;");
+                if(rs.next()){
+                    response = "Email ya utilizado";
+                }else{
+                    PreparedStatement statement = con.prepareStatement("INSERT INTO Usuarios (Nombre, Apellido, Email, Password) VALUES (? ,? ,? ,? )");
+                    statement.setString(1, usuario.getNombre());
+                    statement.setString(2, usuario.getApellido());
+                    statement.setString(3, usuario.getEmail());
+                    statement.setString(4, usuario.getPassword());
 
-                statement.executeUpdate();
-                response = "Usuario registrado exitosamente";
+                    statement.executeUpdate();
+                    response = "Usuario registrado exitosamente";
+                }
+
             }
 
             if(strings[0] == "login"){
@@ -130,6 +138,10 @@ public class DataUser extends AsyncTask<String, Void, String> {
                 break;
 
             case "Error en la conexion a la base de datos" :
+                Toast.makeText(context, response, Toast.LENGTH_LONG).show();
+                break;
+
+            case "Email ya utilizado":
                 Toast.makeText(context, response, Toast.LENGTH_LONG).show();
                 break;
         }
