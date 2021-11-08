@@ -60,6 +60,11 @@ public class CambiarContraseniaActivity extends AppCompatActivity {
         }else if(et_contraseñaNueva.getText().length() < 8 || et_contraseñaRepetir.getText().length() < 8){
             Toast.makeText(this, "Las contraseñas deben contener 8 caracteres o mas", Toast.LENGTH_SHORT).show();
             return false;
+
+            //Valido que la contraseña nueva y actual sean diferentes
+        }else if(et_contraseñaNueva.getText().toString().equals(et_contraseñaActual.getText().toString())){
+            Toast.makeText(this, "La contraseña nueva no puede ser igual a la actual", Toast.LENGTH_SHORT).show();
+            return false;
         }
 
         return true;
