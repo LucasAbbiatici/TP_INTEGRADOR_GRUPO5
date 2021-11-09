@@ -17,7 +17,7 @@
     <string name="tv_nuevaContra">Nueva Contraseña</string>
     <string name="tv_repetirContra">Repetir Contraseña</string>
     <string name="btn_Modificar">Modificar</string>
-    <string name="tv_direccion">[Direccion]</string>
+
     <string name="btn_continuar">Continuar</string>
 
     //texts add_location
@@ -30,11 +30,9 @@
     <string name="tv_addloca_comments">Comentarios generales:</string>
     <string name="btn_addloca_add">Agregar</string>
 
-    <string name="tv_infoMail">[Email]</string>
-    <string name="tv_infoNombre">[Nombre]</string>
-    <string name="tv_infoApellido">[Apellido]</string>
+
     <string name="tv_infoReportes">Reportes Realizados:</string>
-    <string name="tv_cantidad">[Cantidad]</string>
+
     <string name="tv_infoUbicaciones">Ubicaciones Agregadas:</string>
     <string name="btn_modificarContra">Modificar contraseña</string>
     <string name="tv_logout">LogOut</string>
