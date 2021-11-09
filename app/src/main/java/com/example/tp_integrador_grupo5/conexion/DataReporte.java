@@ -53,7 +53,7 @@ public class DataReporte extends AsyncTask<String, Void, String> {
 
             if(strings[0] == "reportar") {
 
-                String query = "INSERT INTO Reportes Values (?,?,1);";
+                String query = "INSERT INTO Reportes Values (?,?);";
                 PreparedStatement pst = con.prepareStatement(query);
 
                 pst.setInt(1, usuario.getId());

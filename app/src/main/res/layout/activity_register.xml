@@ -80,7 +80,9 @@
             android:ems="10"
             android:inputType="textEmailAddress"
             android:minHeight="48dp"
-            tools:ignore="SpeakableTextPresentCheck" />
+            tools:ignore="SpeakableTextPresentCheck"
+
+            />
 
         <TextView
             android:id="@+id/tv_pass"

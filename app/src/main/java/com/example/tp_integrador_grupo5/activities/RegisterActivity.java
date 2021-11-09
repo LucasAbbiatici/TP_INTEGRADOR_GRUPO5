@@ -3,6 +3,8 @@ package com.example.tp_integrador_grupo5.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -43,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
         else if(et_pass.getText().length() < 8 || et_repetirpass.getText().length() < 8) {
             Toast.makeText(this, "Las contraseñas deben contener 8 caracteres o mas", Toast.LENGTH_SHORT).show();
-        } else {
+        } else if(!TextUtils.isEmpty(et_email2.getText().toString()) && Patterns.EMAIL_ADDRESS.matcher(et_email2.getText().toString()).matches()) {
             usuario = new Usuario();
             usuario.setNombre(et_nombre.getText().toString());
             usuario.setApellido(et_apellido.getText().toString());
@@ -51,6 +53,8 @@ public class RegisterActivity extends AppCompatActivity {
             usuario.setPassword(et_pass.getText().toString());
             dataUser = new DataUser(usuario, this);
             dataUser.execute("register");
+        }else {
+            Toast.makeText(this, "Formato de email no valido", Toast.LENGTH_SHORT).show();
         }
     }
 

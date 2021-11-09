@@ -110,11 +110,13 @@
             android:layout_height="48dp"
             android:clickable="false"
             android:ems="10"
-            android:enabled="false"
+            android:enabled="true"
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:gravity="start|top"
             android:inputType="textMultiLine"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:scrollbars="vertical"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <LinearLayout
