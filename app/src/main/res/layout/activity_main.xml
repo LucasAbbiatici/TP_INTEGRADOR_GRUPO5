@@ -4,19 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:onClick="redirec_register"
     tools:context=".activities.MainActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginLeft="64dp"
         android:layout_marginTop="100dp"
         android:layout_marginBottom="353dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_showPass"
+        app:layout_constraintHorizontal_bias="0.071"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.518">
 
         <TextView
             android:id="@+id/tv_login"
@@ -43,8 +47,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:ems="10"
             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+            android:ems="10"
             android:hint="@string/tv_pass"
             android:inputType="textPassword"
             android:minHeight="48dp" />
@@ -55,10 +59,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
+            android:background="@drawable/button_shape"
             android:onClick="ingresar"
             android:text="@string/btn_ingresar"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/button_shape"/>
+            android:textColor="#FFFFFF" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -87,5 +91,18 @@
                 tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btn_showPass"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="28dp"
+        android:onClick="showPass"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.297"
+        app:srcCompat="@drawable/view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

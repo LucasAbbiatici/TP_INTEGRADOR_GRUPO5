@@ -9,8 +9,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.example.tp_integrador_grupo5.R;
 import com.example.tp_integrador_grupo5.conexion.DataUser;
@@ -22,8 +26,10 @@ public class MainActivity extends AppCompatActivity {
     private AlertDialog alertDialog;
     private EditText et_mail;
     private EditText et_password;
+    private ImageButton btn_showPass;
     private Usuario usuario;
     private DataUser dataUser;
+    private boolean flag = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         et_mail = (EditText) findViewById(R.id.et_mail);
         et_password = (EditText) findViewById(R.id.et_password);
-
+        btn_showPass = (ImageButton) findViewById(R.id.btn_showPass);
     }
 
     private void dialogBuilder(){
@@ -77,6 +83,18 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    public void showPass(View view){
+        if(flag){
+            et_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            btn_showPass.setImageResource(R.drawable.hidden);
+            flag = false;
+        } else{
+            et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            btn_showPass.setImageResource(R.drawable.view);
+            flag = true;
+        }
     }
 
 }
