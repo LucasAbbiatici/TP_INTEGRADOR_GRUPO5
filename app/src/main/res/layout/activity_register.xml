@@ -12,10 +12,11 @@
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_showPassReg"
+        app:layout_constraintHorizontal_bias="0.759"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.368">
+        app:layout_constraintVertical_bias="0.391">
 
         <TextView
             android:id="@+id/tv_register2"
@@ -38,8 +39,8 @@
         <EditText
             android:id="@+id/et_nombre"
             android:layout_width="match_parent"
-            android:digits="abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ "
             android:layout_height="wrap_content"
+            android:digits="abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ "
             android:ems="10"
             android:inputType="textPersonName"
             android:minHeight="48dp"
@@ -134,4 +135,17 @@
             android:textSize="18sp" />
 
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btn_showPassReg"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:onClick="showPass"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.653"
+        app:srcCompat="@drawable/view" />
 </androidx.constraintlayout.widget.ConstraintLayout>

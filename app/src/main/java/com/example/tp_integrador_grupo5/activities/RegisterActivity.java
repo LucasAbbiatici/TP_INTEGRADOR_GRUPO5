@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.tp_integrador_grupo5.R;
@@ -22,6 +25,8 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText et_repetirpass;
     private DataUser dataUser;
     private Usuario usuario;
+    private ImageButton btn_showPassReg;
+    private boolean flag = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
         et_email2 = (EditText) findViewById(R.id.et_email2);
         et_pass = (EditText) findViewById(R.id.et_pass);
         et_repetirpass = (EditText) findViewById(R.id.et_repetirpass);
+        btn_showPassReg = (ImageButton) findViewById(R.id.btn_showPassReg);
     }
 
     //Evento del boton registrarse cuando se hace click.
@@ -66,5 +72,19 @@ public class RegisterActivity extends AppCompatActivity {
         if ( et_pass.getText().toString().isEmpty() ) isEmpty = true;
         if ( et_repetirpass.getText().toString().isEmpty() ) isEmpty = true;
         return isEmpty;
+    }
+
+    public void showPass(View view){
+        if(flag){
+            et_pass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            et_repetirpass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            btn_showPassReg.setImageResource(R.drawable.hidden);
+            flag = false;
+        } else{
+            et_pass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            et_repetirpass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            btn_showPassReg.setImageResource(R.drawable.view);
+            flag = true;
+        }
     }
 }
