@@ -3,8 +3,11 @@ package com.example.tp_integrador_grupo5.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.tp_integrador_grupo5.R;
@@ -17,6 +20,11 @@ public class CambiarContraseniaActivity extends AppCompatActivity {
     private EditText et_contraseñaActual;
     private EditText et_contraseñaNueva;
     private EditText et_contraseñaRepetir;
+    private ImageButton btn_showPass_modNueva;
+    private ImageButton btn_showPass_modActual;
+    private boolean flag1 = true;
+    private boolean flag2 = true;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +34,9 @@ public class CambiarContraseniaActivity extends AppCompatActivity {
         et_contraseñaActual = (EditText) findViewById(R.id.et_contraActual);
         et_contraseñaNueva = (EditText) findViewById(R.id.et_nuevaContra);
         et_contraseñaRepetir = (EditText) findViewById(R.id.et_repetirContra);
+
+        btn_showPass_modActual = (ImageButton) findViewById(R.id.btn_showPass_modActual);
+        btn_showPass_modNueva = (ImageButton) findViewById(R.id.btn_showPass_modNueva);
 
         usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 
@@ -75,5 +86,31 @@ public class CambiarContraseniaActivity extends AppCompatActivity {
         if ( et_contraseñaRepetir.getText().toString().isEmpty() ) isEmpty = true;
         if ( et_contraseñaNueva.getText().toString().isEmpty() ) isEmpty = true;
         return isEmpty;
+    }
+
+    public void showPassModNueva(View view){
+        if(flag1){
+            et_contraseñaNueva.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            et_contraseñaRepetir.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            btn_showPass_modNueva.setImageResource(R.drawable.hidden);
+            flag1 = false;
+        } else{
+            et_contraseñaNueva.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            et_contraseñaRepetir.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            btn_showPass_modNueva.setImageResource(R.drawable.view);
+            flag1 = true;
+        }
+    }
+
+    public void showPassModActual(View view){
+        if(flag2){
+            et_contraseñaActual.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            btn_showPass_modActual.setImageResource(R.drawable.hidden);
+            flag2 = false;
+        }else{
+            et_contraseñaActual.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            btn_showPass_modActual.setImageResource(R.drawable.view);
+            flag2 = true;
+        }
     }
 }

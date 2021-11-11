@@ -12,10 +12,11 @@
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_showPass_modNueva"
+        app:layout_constraintHorizontal_bias="0.759"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.368">
+        app:layout_constraintVertical_bias="0.34">
 
         <TextView
             android:id="@+id/tv_Titulo"
@@ -39,11 +40,11 @@
             android:id="@+id/et_contraActual"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
             android:ems="10"
             android:inputType="textPassword"
             android:minHeight="48dp"
-            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
-            tools:ignore="SpeakableTextPresentCheck"/>
+            tools:ignore="SpeakableTextPresentCheck" />
 
 
         <TextView
@@ -51,19 +52,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:textSize="16sp"
             android:text="@string/tv_nuevaContra"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/et_nuevaContra"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+            android:ems="10"
             android:inputType="textPassword"
             android:minHeight="48dp"
-            tools:ignore="SpeakableTextPresentCheck"/>
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
             android:id="@+id/tv_repetirContra"
@@ -81,7 +82,7 @@
             android:ems="10"
             android:inputType="textPassword"
             android:minHeight="48dp"
-            tools:ignore="SpeakableTextPresentCheck"/>
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <Button
             android:id="@+id/btn_modificar"
@@ -89,10 +90,36 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@drawable/button_shape"
-            android:onClick="onClickCambiarPass"
             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+            android:onClick="onClickCambiarPass"
             android:text="@string/btn_Modificar"
             android:textAllCaps="false"
             android:textSize="18sp" />
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btn_showPass_modActual"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="176dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:onClick="showPassModActual"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/view" />
+
+    <ImageButton
+        android:id="@+id/btn_showPass_modNueva"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:onClick="showPassModNueva"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_showPass_modActual"
+        app:layout_constraintVertical_bias="0.025"
+        app:srcCompat="@drawable/view" />
 </androidx.constraintlayout.widget.ConstraintLayout>
