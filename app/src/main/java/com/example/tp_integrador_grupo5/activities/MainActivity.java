@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.tp_integrador_grupo5.R;
 import com.example.tp_integrador_grupo5.conexion.DataUser;
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
             alertDialog.show();
-        } else {
+        } else if(!et_mail.getText().toString().isEmpty() && !et_password.getText().toString().isEmpty()) {
 
             usuario = new Usuario();
 
@@ -81,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
             dataUser = new DataUser(usuario, this);
             dataUser.execute("login");
 
+        } else {
+            Toast.makeText(this, "Porfavor, complete todos los campos.", Toast.LENGTH_SHORT).show();
         }
 
     }

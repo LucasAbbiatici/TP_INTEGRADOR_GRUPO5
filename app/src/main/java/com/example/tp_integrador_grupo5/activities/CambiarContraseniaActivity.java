@@ -14,6 +14,8 @@ import com.example.tp_integrador_grupo5.R;
 import com.example.tp_integrador_grupo5.conexion.DataUser;
 import com.example.tp_integrador_grupo5.entidades.Usuario;
 
+import java.util.regex.Pattern;
+
 public class CambiarContraseniaActivity extends AppCompatActivity {
     private Usuario usuario;
     private DataUser dataUser;
@@ -52,6 +54,9 @@ public class CambiarContraseniaActivity extends AppCompatActivity {
     }
 
     private boolean validarContraseña(){
+        Pattern patternPass = Pattern.compile("^(?=.*[0-9])(?=.*[A-Za-z])(?=\\S+$).{8,}$");
+        boolean matches1 = patternPass.matcher(et_contraseñaNueva.getText().toString()).matches();
+
         if(ControlIsEmpty()){
             Toast.makeText(this, "Complete los campos", Toast.LENGTH_SHORT).show();
             return false;
@@ -67,8 +72,8 @@ public class CambiarContraseniaActivity extends AppCompatActivity {
             return false;
 
             //Valido que la contraseña nueva y la repetida introducida tengan mas de 7 caracteres
-        }else if(et_contraseñaNueva.getText().length() < 8 || et_contraseñaRepetir.getText().length() < 8){
-            Toast.makeText(this, "Las contraseñas deben contener 8 caracteres o mas", Toast.LENGTH_SHORT).show();
+        }else if(!matches1){
+            Toast.makeText(this, "Las contraseñas deben contener 8 caracteres o mas y contener mínimo un número y una letra", Toast.LENGTH_SHORT).show();
             return false;
 
             //Valido que la contraseña nueva y actual sean diferentes

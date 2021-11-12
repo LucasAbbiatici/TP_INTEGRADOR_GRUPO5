@@ -1,5 +1,6 @@
 package com.example.tp_integrador_grupo5.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -27,7 +28,9 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.example.tp_integrador_grupo5.databinding.ActivityMapsBinding;
+import com.google.android.gms.tasks.CancellationToken;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.OnTokenCanceledListener;
 
 import java.util.ArrayList;
 
@@ -64,8 +67,21 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         fabActual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                CancellationToken token = new CancellationToken() {
+                    @Override
+                    public boolean isCancellationRequested() {
+                        return false;
+                    }
+
+                    @NonNull
+                    @Override
+                    public CancellationToken onCanceledRequested(@NonNull OnTokenCanceledListener onTokenCanceledListener) {
+                        return null;
+                    }
+                };
+
                 if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                    fusedLocationClient.getLastLocation()
+                    fusedLocationClient.getCurrentLocation(100, token)
                             .addOnSuccessListener(MapsActivity.this, new OnSuccessListener<Location>() {
                                 @Override
                                 public void onSuccess(Location location) {

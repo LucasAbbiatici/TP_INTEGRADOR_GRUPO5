@@ -16,6 +16,9 @@ import com.example.tp_integrador_grupo5.R;
 import com.example.tp_integrador_grupo5.conexion.DataUser;
 import com.example.tp_integrador_grupo5.entidades.Usuario;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText et_nombre;
@@ -43,14 +46,18 @@ public class RegisterActivity extends AppCompatActivity {
 
     //Evento del boton registrarse cuando se hace click.
     public void RegisterOnClick(View view){
+
+        Pattern patternPass = Pattern.compile("^(?=.*[0-9])(?=.*[A-Za-z])(?=\\S+$).{8,}$");
+        boolean matches1 = patternPass.matcher(et_pass.getText().toString()).matches();
+
         if (ControlIsEmpty()){
             Toast.makeText(this, "Por favor complete todos los campos", Toast.LENGTH_LONG).show();
         }
         else if (!et_pass.getText().toString().equals(et_repetirpass.getText().toString())){
             Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_LONG).show();
         }
-        else if(et_pass.getText().length() < 8 || et_repetirpass.getText().length() < 8) {
-            Toast.makeText(this, "Las contraseñas deben contener 8 caracteres o mas", Toast.LENGTH_SHORT).show();
+        else if(!matches1) {
+            Toast.makeText(this, "Las contraseñas deben contener 8 caracteres o mas y contener mínimo un número y una letra", Toast.LENGTH_LONG).show();
         } else if(!TextUtils.isEmpty(et_email2.getText().toString()) && Patterns.EMAIL_ADDRESS.matcher(et_email2.getText().toString()).matches()) {
             usuario = new Usuario();
             usuario.setNombre(et_nombre.getText().toString());

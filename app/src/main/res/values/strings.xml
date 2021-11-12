@@ -22,7 +22,6 @@
 
     //texts add_location
     <string name="tv_addloca_title">Completar datos de la ubicación</string>
-    <string name="tv_addloca_cant">Cantinadad de personas: </string>
     <string name="sw_addloca_children">Niños: </string>
     <string name="sw_addloca_pets">Mascotas: </string>
     <string name="sw_addloca_handicapped">Discapacitados: </string>
